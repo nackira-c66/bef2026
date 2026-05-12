@@ -34,8 +34,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 .gwth{font-size:10px;color:#aaa;text-align:center;padding:4px 0;border-bottom:1px solid #e0e0dc;border-right:1px solid #ebebeb;min-width:36px;width:36px;background:#f5f5f3}
 .gwth.tw{background:#FCEBEB;color:#A32D2D;font-weight:700}
 .gc{min-width:36px;width:36px;height:28px;border-right:1px solid #f0f0f0;border-bottom:1px solid #ebebeb}
-.gc.bb{background:#b5d4f4}.gc.bp{background:#f4c0d1}.gc.bt{background:#9fe1cb}.gc.bk{background:#f5e6c8}
-.gc.sb.bb{border-left:3px solid #185FA5}.gc.sb.bp{border-left:3px solid #993556}.gc.sb.bt{border-left:3px solid #0F6E56}.gc.sb.bk{border-left:3px solid #c47f00}
+.gc.bb{background:#b5d4f4}.gc.bp{background:#f4c0d1}.gc.bt{background:#9fe1cb}
+.gc.sb.bb{border-left:3px solid #185FA5}.gc.sb.bp{border-left:3px solid #993556}.gc.sb.bt{border-left:3px solid #0F6E56}
 .gc.tw{border-right:2px solid #E24B4A}.gc.grp{height:28px}
 
 /* MONTH */
@@ -51,14 +51,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 .calweek:last-child{border-bottom:0}
 .daycol{border-right:1px solid #ebebeb;padding:4px 5px;position:relative}
 .daycol:last-child{border-right:0}
-.daycol.other{background:#fafaf8}.daycol.tday{background:#fff8f5}.daycol.holiday{background:repeating-linear-gradient(135deg,#fdf6e3,#fdf6e3 4px,#fef9f0 4px,#fef9f0 8px)}
+.daycol.other{background:#fafaf8}.daycol.tday{background:#fff8f5}
 .dnum{font-size:11px;color:#888;font-weight:600}.dnum.td{color:#A32D2D;font-weight:800}
 .evbar{position:absolute;height:19px;font-size:10px;font-weight:600;line-height:19px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:opacity .1s}
 .evbar:hover{opacity:.8}
 .evbar.blue{background:#b5d4f4;color:#0c447c}.evbar.pink{background:#f4c0d1;color:#72243e}.evbar.teal{background:#9fe1cb;color:#085041}
 .evbar.es.blue{border-left:3px solid #185FA5}.evbar.es.pink{border-left:3px solid #993556}.evbar.es.teal{border-left:3px solid #0F6E56}
-.evbar.block{background:#f5e6c8;color:#7a5000}.evbar.es.block{border-left:3px solid #c47f00}
-.daycol.holiday{background:repeating-linear-gradient(135deg,#fdf6e3,#fdf6e3 4px,#fef9f0 4px,#fef9f0 8px)}
 
 /* WEEK */
 .wgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
@@ -108,6 +106,46 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
 .stitle{font-size:12px;font-weight:700;color:#555;margin-bottom:10px}
 .hint{font-size:11px;color:#aaa;margin-top:6px}
+
+/* DISEÑO TAB */
+.dfilters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.dfbtn{padding:5px 14px;border-radius:20px;border:1px solid #ddd;font-size:11px;cursor:pointer;background:#fff;color:#666;font-family:inherit;font-weight:600}
+.dfbtn:hover{background:#f5f5f3}
+.dfbtn.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.dweek{margin-bottom:10px;border:1px solid #e0e0dc;border-radius:10px;overflow:hidden}
+.dwhdr{background:#f5f5f3;padding:8px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #e0e0dc}
+.dwlbl{font-size:12px;font-weight:700;color:#1a1a1a;flex:1}
+.dwcnt{font-size:11px;background:#f4c0d1;color:#72243e;padding:2px 9px;border-radius:10px;font-weight:700}
+.dtrow{display:flex;align-items:flex-start;padding:8px 14px;border-bottom:1px solid #ebebeb;gap:10px}
+.dtrow:last-child{border-bottom:0}
+.dtrow:hover{background:#fafaf8}
+.dcdot{width:7px;height:7px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.dttitle{font-size:12px;color:#1a1a1a;flex:1;line-height:1.4}
+.dtmeta{display:flex;gap:5px;align-items:center;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.dowbadge{font-size:10px;padding:2px 8px;border-radius:10px;background:#f5f5f3;color:#555;border:1px solid #e0e0dc;font-weight:600}
+.dstbadge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
+.dst-done{background:#9fe1cb;color:#085041}
+.dst-prog{background:#faeeda;color:#854f0b}
+.dst-pend{background:#f5f5f3;color:#888}
+.dcattag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
+.dcat-imp{background:#faece7;color:#993c1d}
+.dcat-dig{background:#e6f1fb;color:#185fa5}
+.dcat-red{background:#eeedfe;color:#534ab7}
+.dcat-sta{background:#fbeaf0;color:#993556}
+.dcat-web{background:#eaf3de;color:#3b6d11}
+.dcat-otr{background:#f5f5f3;color:#888}
+.dtoggle{font-size:10px;padding:3px 10px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;font-weight:700;white-space:nowrap;transition:background .1s}
+.dtoggle.done{background:#9fe1cb;color:#085041;border-color:#5dcaa5}
+.dtoggle.done:hover{background:#5dcaa5}
+.dtoggle.pend{background:#f5f5f3;color:#555;border-color:#ddd}
+.dtoggle.pend:hover{background:#ebebeb}
+.dleg{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.dli{display:flex;align-items:center;gap:5px;font-size:11px;color:#666}
+.dlsq{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.dstat{background:#f5f5f3;border-radius:8px;padding:10px 14px}
+.dslbl{font-size:11px;color:#888;margin-bottom:3px}
+.dsval{font-size:20px;font-weight:700}
 </style>
 </head>
 <body>
@@ -116,14 +154,17 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
 <div class="hdr">
   <div><div class="htitle">Boricua Emprende Fest 2026</div><div class="hsub">Dashboard de planificación · Mayo – Septiembre 2026</div></div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
-    <div class="badge" style="background:#d4f4e0;color:#0a5c2e;font-size:15px;padding:8px 18px;font-weight:700">4 Sep 2026</div>
-    <div id="dbadge" style="font-size:11px;color:#555;font-weight:600"></div>
-    <span id="save-ind" style="font-size:11px;font-weight:600;margin-top:2px"></span>
+    <div class="badge">Evento: 4 sep 2026</div>
+    <div id="dbadge" style="font-size:11px;color:#993556;font-weight:700"></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:2px">
+      <span id="save-ind" style="font-size:11px;font-weight:600"></span>
+      <button onclick="resetToDefault()" style="font-size:11px;padding:3px 10px;border:1px solid #ddd;border-radius:6px;cursor:pointer;background:#fff;color:#888;font-family:inherit">Restaurar originales</button>
+    </div>
   </div>
 </div>
 
 <div class="stats">
-  <div class="stat"><div class="slbl">Días al evento</div><div class="sval" id="sdays" style="color:#1a1a1a">—</div></div>
+  <div class="stat"><div class="slbl">Días al evento</div><div class="sval" id="sdays" style="color:#993556">—</div></div>
   <div class="stat"><div class="slbl">Semanas restantes</div><div class="sval" id="sweeks">—</div></div>
   <div class="stat"><div class="slbl">Tareas BEF</div><div class="sval" id="sbef" style="color:#993556">—</div></div>
   <div class="stat"><div class="slbl">Tareas Reporte</div><div class="sval" id="srep" style="color:#185fa5">—</div></div>
@@ -133,14 +174,15 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
   <div class="li"><div class="lsq" style="background:#b5d4f4"></div>Reporte comunidad empresarial</div>
   <div class="li"><div class="lsq" style="background:#f4c0d1"></div>Boricua Emprende Fest</div>
   <div class="li"><div class="lsq" style="background:#9fe1cb"></div>Revisiones &amp; seguimiento</div>
-  <div class="li"><div class="lsq" style="background:#f5e6c8;border:1px solid #c47f00"></div>Feriados &amp; eventos</div>
-  <div class="li" style="color:#aaa;font-style:italic">Doble clic en una tarea para editar</div>
+  <div class="li"><div class="lsq" style="background:#E24B4A;border-radius:50%"></div>Semana actual</div>
+  <div class="li" style="color:#aaa;font-style:italic">Doble clic en tarea para editar</div>
 </div>
 
 <div class="tabs">
   <button class="tab active" onclick="sv('month',this)">Mes</button>
   <button class="tab" onclick="sv('week',this)">Semana</button>
   <button class="tab" onclick="sv('gantt',this)">Línea de tiempo</button>
+  <button class="tab" onclick="sv('diseno',this)">Tareas</button>
 </div>
 
 <div id="vmonth" class="view active">
@@ -161,6 +203,32 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
 </div>
 <div id="vgantt" class="view"><div class="gout"><table class="gtbl" id="gtbl"></table></div></div>
 
+<div id="vdiseno" class="view">
+  <div class="dstats">
+    <div class="dstat"><div class="dslbl">Tareas totales</div><div class="dsval" id="ds-total">—</div></div>
+    <div class="dstat"><div class="dslbl">Completadas</div><div class="dsval" id="ds-done" style="color:#0F6E56">—</div></div>
+    <div class="dstat"><div class="dslbl">Pendientes</div><div class="dsval" id="ds-pend" style="color:#993556">—</div></div>
+    <div class="dstat"><div class="dslbl">Semanas activas</div><div class="dsval" id="ds-weeks">—</div></div>
+  </div>
+  <div class="dleg">
+    <span class="dli"><span class="dlsq" style="background:#D85A30"></span>Impreso</span>
+    <span class="dli"><span class="dlsq" style="background:#378ADD"></span>Digital</span>
+    <span class="dli"><span class="dlsq" style="background:#7F77DD"></span>Redes</span>
+    <span class="dli"><span class="dlsq" style="background:#D4537E"></span>Stage</span>
+    <span class="dli"><span class="dlsq" style="background:#639922"></span>Website</span>
+    <span class="dli"><span class="dlsq" style="background:#888"></span>Otro</span>
+  </div>
+  <div class="dfilters">
+    <button class="dfbtn active" onclick="dSetFilter('all',this)">Todas</button>
+    <button class="dfbtn" onclick="dSetFilter('Nackira',this)">Nackira</button>
+    <button class="dfbtn" onclick="dSetFilter('Noriana',this)">Noriana</button>
+    <button class="dfbtn" onclick="dSetFilter('Augusto',this)">Augusto</button>
+    <button class="dfbtn" onclick="dSetFilter('pending',this)">Pendientes</button>
+    <button class="dfbtn" onclick="dSetFilter('done',this)">Completadas</button>
+  </div>
+  <div id="diseno-weeks"></div>
+</div>
+
 <!-- EDIT MODAL -->
 <div class="overlay" id="overlay" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
@@ -172,7 +240,6 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
         <option value="pink">Boricua Emprende Fest</option>
         <option value="blue">Reporte comunidad</option>
         <option value="teal">Revisión / Seguimiento</option>
-        <option value="block">Feriados &amp; Eventos</option>
       </select>
     </div>
     <div class="frow">
@@ -198,7 +265,7 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
     <div class="frow">
       <div class="fg"><label class="fl">Nombre de la tarea</label><input id="an" type="text" placeholder="Ej: Diseño de banner"></div>
       <div class="fg"><label class="fl">Proyecto</label>
-        <select id="at"><option value="pink">Boricua Emprende Fest</option><option value="blue">Reporte comunidad</option><option value="teal">Revisión / Seguimiento</option><option value="block">Feriados &amp; Eventos</option></select>
+        <select id="at"><option value="pink">Boricua Emprende Fest</option><option value="blue">Reporte comunidad</option><option value="teal">Revisión / Seguimiento</option></select>
       </div>
     </div>
     <div class="frow">
@@ -207,7 +274,6 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
     </div>
     <div class="mbtns"><button class="btn btnp" onclick="addTask()">Agregar tarea</button><span class="fmsg" id="amsg"></span></div>
     <div class="hint">Tip: en la vista Mes o Semana, haz doble clic sobre cualquier tarea para editarla directamente.</div>
-    <div style="margin-top:8px"><button class="btn" onclick="deduplicateDB()" style="font-size:11px;color:#888;border-color:#e0e0dc">Limpiar duplicados</button></div>
     <hr class="dv">
     <div class="stitle">Todas las tareas</div>
     <div class="tlist" id="tlist"></div>
@@ -318,20 +384,12 @@ let EV=[
   /* ── SEP ── */
   /* Screenshot 5: pink Mon 7 – Tue 8 Sep */
   {n:'Certificados de participación & agradecimientos', s:new Date(2026,8,7), e:new Date(2026,8,8), t:'teal'},
-
-  /* ── FERIADOS & EVENTOS ── */
-  {n:'Feriado',                    s:new Date(2026,4,25), e:new Date(2026,4,25), t:'block'},
-  {n:'Feriado',                    s:new Date(2026,5,18), e:new Date(2026,5,18), t:'block'},
-  {n:'Feriado',                    s:new Date(2026,6,3),  e:new Date(2026,6,3),  t:'block'},
-  {n:'Feriado',                    s:new Date(2026,6,23), e:new Date(2026,6,24), t:'block'},
-  {n:'Vacaciones',                 s:new Date(2026,6,29), e:new Date(2026,7,7),  t:'block'},
-  {n:'Boricua Emprende Fest 🎉',   s:new Date(2026,8,4),  e:new Date(2026,8,4),  t:'block'},
 ];
 
 /* ══════════ HELPERS ══════════ */
-const TL={pink:'BEF',blue:'Reporte',teal:'Revisión',block:'Bloqueo'};
-const TBG={pink:'#f4c0d1',blue:'#b5d4f4',teal:'#9fe1cb',block:'#f5e6c8'};
-const TTC={pink:'#72243e',blue:'#0c447c',teal:'#085041',block:'#7a5000'};
+const TL={pink:'BEF',blue:'Reporte',teal:'Revisión'};
+const TBG={pink:'#f4c0d1',blue:'#b5d4f4',teal:'#9fe1cb'};
+const TTC={pink:'#72243e',blue:'#0c447c',teal:'#085041'};
 
 function doStats(){
   const ev=new Date(2026,8,4);
@@ -340,7 +398,7 @@ function doStats(){
   document.getElementById('sweeks').textContent=Math.ceil(dl/7);
   document.getElementById('sbef').textContent=EV.filter(e=>e.t==='pink').length;
   document.getElementById('srep').textContent=EV.filter(e=>e.t==='blue').length;
-  document.getElementById('dbadge').textContent='Evento: '+dl+' días · '+Math.ceil(dl/7)+' semanas';
+  document.getElementById('dbadge').textContent=dl+' días restantes';
 }
 
 /* ══════════ GANTT ══════════ */
@@ -360,7 +418,6 @@ function doGantt(){
     {label:'Reporte Comunidad Empresarial',t:'blue',bg:'#EBF4FC'},
     {label:'Boricua Emprende Fest',t:'pink',bg:'#FDF0F5'},
     {label:'Revisiones & Seguimiento',t:'teal',bg:'#EAF7F2'},
-    {label:'Feriados & Eventos',t:'block',bg:'#FDF6E3'},
   ];
   let h='<thead><tr><th class="gth">Tarea</th>';
   Object.values(mS).forEach(ms=>{h+=`<th colspan="${ms.c}" class="gmth">${MES[ms.m]} ${ms.y}</th>`;});
@@ -380,7 +437,7 @@ function doGantt(){
       h+=`<tr><td class="gtd" title="${ev.n}">${ev.n}</td>`;
       weeks.forEach(w=>{
         const we=add(w,6),inB=ev.s<=we&&ev.e>=w,isS=ev.s>=w&&ev.s<=we,isTW=HOY>=w&&HOY<add(w,7);
-        const tc=ev.t==='block'?'k':ev.t[0];
+        const tc=ev.t[0];
         let cls='gc';
         if(inB) cls+=` b${tc}${isS?' sb':''}`;
         if(isTW) cls+=' tw';
@@ -405,7 +462,7 @@ function doMonth(){
   for(let d=1;d<=dim;d++) cells.push(new Date(cY,cM,d));
   while(cells.length%7!==0) cells.push(null);
   const nw=cells.length/7;
-  const BH=20,BG=2,DNH=20,MIN_ROW_H=90;
+  const BH=20,BG=2,DNH=20;
 
   /* compute bar positions */
   const slotMap=Array.from({length:nw},()=>Array(7).fill(0));
@@ -433,7 +490,7 @@ function doMonth(){
 
   const maxSl=Array(nw).fill(0);
   bars.forEach(b=>{maxSl[b.wi]=Math.max(maxSl[b.wi],b.slot+1);});
-  const rowH=wi=>Math.max(MIN_ROW_H, DNH+(maxSl[wi]*(BH+BG))+8);
+  const rowH=wi=>DNH+(maxSl[wi]*(BH+BG))+8;
 
   let h='<div class="calwrap"><div class="dowrow">';
   DS.forEach(d=>{h+=`<div class="dow">${d}</div>`;});
@@ -446,7 +503,6 @@ function doMonth(){
       let cls='daycol';
       if(!dc||dc.getMonth()!==cM) cls+=' other';
       else if(eq(dc,HOY)) cls+=' tday';
-      else if(dc&&EV.some(ev=>ev.t==='block'&&inR(dc,ev.s,ev.e))) cls+=' holiday';
       const num=dc?dc.getDate():'';
       const nc=dc&&eq(dc,HOY)?'dnum td':'dnum';
       h+=`<div class="${cls}" style="min-height:${rh}px"><div class="${nc}">${num}</div></div>`;
@@ -498,6 +554,170 @@ function sv(name,btn){
   btn.classList.add('active');
   if(name==='month') doMonth();
   if(name==='week') doWeek();
+  if(name==='diseno') doDiseno();
+}
+
+/* ══════════ DISEÑO (NACKIRA) TAB ══════════ */
+const DESIGN_TASKS=[
+  {id:"dt-001",title:"Save the date (Ads, Newsletter, Website Carrusel, Slide)",owner:"Nackira",start:"2026-02-20",end:"2026-02-20",status:100,cat:"Digital"},
+  {id:"dt-002",title:"Billboards",owner:"Nackira",start:"2026-04-23",end:"2026-04-23",status:100,cat:"Impreso"},
+  {id:"dt-003",title:"Boletos: Early bee (Ads, Newsletter, Website Carrusel, Slide)",owner:"Nackira",start:"2026-04-08",end:"2026-04-08",status:100,cat:"Digital"},
+  {id:"dt-004",title:"Boletos: Venta de boletos regular (Ads, Newsletter, Slide)",owner:"Nackira",start:"2026-04-08",end:"2026-04-08",status:100,cat:"Digital"},
+  {id:"dt-005",title:"Boletos: Venta de boletos con descuento (Post)",owner:"Nackira",start:"2026-04-08",end:"2026-04-08",status:100,cat:"Digital"},
+  {id:"dt-006",title:"El Panal Expo: Typeform",owner:"Nackira",start:"2026-04-08",end:"2026-04-08",status:100,cat:"Digital"},
+  {id:"dt-007",title:"El Panal Expo: Newsletter",owner:"Nackira",start:"2026-04-09",end:"2026-04-09",status:100,cat:"Digital"},
+  {id:"dt-008",title:"El Panal Expo: Post (Regular y Visítime)",owner:"Nackira",start:"2026-04-10",end:"2026-04-10",status:100,cat:"Digital"},
+  {id:"dt-009",title:"El Panal Expo: Cantidad de Conexiones Creadas",owner:"Nackira",start:"2026-04-11",end:"2026-04-11",status:100,cat:"Digital"},
+  {id:"dt-010",title:"Camisas: Team",owner:"Nackira",start:"2026-04-23",end:"2026-04-23",status:50,cat:"Impreso"},
+  {id:"dt-011",title:"Solicitar arte para Newsletter y email",owner:"Nackira",start:"2026-04-15",end:"2026-04-17",status:0,cat:"Digital"},
+  {id:"dt-012",title:"Website: Pagina de Comite Estratégico",owner:"Nackira",start:"2026-05-01",end:"2026-05-05",status:0,cat:"Website"},
+  {id:"dt-013",title:"El Panal Expo: Reel Logos de Orgs",owner:"Noriana",start:"2026-05-28",end:"2026-05-29",status:0,cat:"Redes"},
+  {id:"dt-014",title:"LISC Competition: Página en Website",owner:"Nackira",start:"2026-05-28",end:"2026-05-29",status:0,cat:"Website"},
+  {id:"dt-015",title:"Redes: La Placita",owner:"Noriana",start:"2026-06-01",end:"2026-06-01",status:100,cat:"Redes"},
+  {id:"dt-016",title:"LISC Competition: Post informativo (Requisitos, Categorías)",owner:"Nackira",start:"2026-06-02",end:"2026-06-05",status:0,cat:"Redes"},
+  {id:"dt-017",title:"Redes: La Colmena Pop-Up",owner:"Noriana",start:"2026-06-02",end:"2026-06-02",status:100,cat:"Redes"},
+  {id:"dt-018",title:"Redes/Email: Welcome Event Asset",owner:"Nackira",start:"2026-06-05",end:"2026-06-05",status:0,cat:"Redes"},
+  {id:"dt-019",title:"Redes: Reel de MCs",owner:"Noriana",start:"2026-06-05",end:"2026-06-05",status:0,cat:"Redes"},
+  {id:"dt-020",title:"Redes: El Glosario del BE Fest",owner:"Nackira",start:"2026-06-07",end:"2026-06-07",status:100,cat:"Redes"},
+  {id:"dt-021",title:"Ads: Asset de ventas para ENDI",owner:"Nackira",start:"2026-06-08",end:"2026-06-08",status:0,cat:"Digital"},
+  {id:"dt-022",title:"Redes: Carrusel de keynote speakers",owner:"Noriana",start:"2026-06-15",end:"2026-06-18",status:0,cat:"Redes"},
+  {id:"dt-023",title:"Stills de pantalla: Para todo el evento y cada sesión",owner:"Augusto",start:"2026-06-24",end:"2026-09-01",status:0,cat:"Digital"},
+  {id:"dt-024",title:"Table Tent - Reservado y Auspiciadores",owner:"Nackira",start:"2026-06-29",end:"2026-07-02",status:0,cat:"Impreso"},
+  {id:"dt-025",title:"Table Tent - Coffee break",owner:"Nackira",start:"2026-06-29",end:"2026-07-02",status:0,cat:"Impreso"},
+  {id:"dt-026",title:"Agenda Digital (en website)",owner:"Nackira",start:"2026-07-06",end:"2026-07-10",status:50,cat:"Website"},
+  {id:"dt-027",title:"Website: Pagina de Mentor Hub",owner:"Nackira",start:"2026-07-06",end:"2026-07-10",status:0,cat:"Website"},
+  {id:"dt-028",title:"Redes: Carruseles para cada track con descripción y sesiones",owner:"Augusto",start:"2026-07-13",end:"2026-08-28",status:0,cat:"Redes"},
+  {id:"dt-029",title:"Mentor Lounge Backwall",owner:"Nackira",start:"2026-07-20",end:"2026-07-23",status:0,cat:"Impreso"},
+  {id:"dt-030",title:"Camisas: Voluntarios",owner:"Nackira",start:"2026-08-03",end:"2026-08-03",status:0,cat:"Impreso"},
+  {id:"dt-031",title:"Redes: Giveaway",owner:"Nackira",start:"2026-08-03",end:"2026-08-03",status:0,cat:"Redes"},
+  {id:"dt-032",title:"Direccionales (6)",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
+  {id:"dt-033",title:"Dboard - Mentor Lounge",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
+  {id:"dt-034",title:"Dboard - El Panal Expo",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
+  {id:"dt-035",title:"Dboard - Sponsors",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
+  {id:"dt-036",title:"Dboard - Coffee Talks",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
+  {id:"dt-037",title:"Dboard - La Colmena PopUp",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
+  {id:"dt-038",title:"Dboard - La Placita",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
+  {id:"dt-039",title:"Dboard - Podcast Village",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
+  {id:"dt-040",title:"Dboard - Networking",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
+  {id:"dt-041",title:"Dboard - Salones (Tracks)",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
+  {id:"dt-042",title:"LISC Competition: Cheques simbólicos (Premiaciones)",owner:"Nackira",start:"2026-08-13",end:"2026-08-17",status:0,cat:"Impreso"},
+  {id:"dt-043",title:"Badge ID",owner:"Nackira",start:"2026-08-17",end:"2026-08-17",status:0,cat:"Impreso"},
+  {id:"dt-044",title:"Redes: Reel de Auspiciadores",owner:"Noriana",start:"2026-08-17",end:"2026-08-22",status:50,cat:"Redes"},
+  {id:"dt-045",title:"Planos de señalización",owner:"Nackira",start:"2026-08-24",end:"2026-08-25",status:0,cat:"Impreso"},
+  {id:"dt-046",title:"Table Tent - Welcome Event",owner:"Nackira",start:"2026-08-24",end:"2026-08-24",status:0,cat:"Impreso"},
+  {id:"dt-047",title:"Counter Signs (Registro)",owner:"Nackira",start:"2026-08-25",end:"2026-08-27",status:0,cat:"Impreso"},
+  {id:"dt-048",title:"Stage: Podium Graphics",owner:"Nackira",start:"2026-08-31",end:"2026-09-03",status:0,cat:"Stage"},
+  {id:"dt-049",title:"Stage: LED Screens",owner:"Nackira",start:"2026-08-31",end:"2026-09-03",status:0,cat:"Stage"},
+  {id:"dt-050",title:"Stage: Arco y/o Totems Digitales",owner:"Nackira",start:"2026-08-31",end:"2026-09-03",status:0,cat:"Stage"},
+  {id:"dt-051",title:"Welcome Event: Sponsor Loop",owner:"Noriana",start:"2026-08-31",end:"2026-08-31",status:0,cat:"Digital"},
+  {id:"dt-052",title:"Post Evento: Certificados, Agradecimientos",owner:"Nackira",start:"2026-09-07",end:"2026-09-08",status:0,cat:"Otro"},
+];
+
+const DCAT_DOT={Impreso:"#D85A30",Digital:"#378ADD",Redes:"#7F77DD",Stage:"#D4537E",Website:"#639922",Otro:"#888"};
+const DCAT_CLS={Impreso:"dcat-imp",Digital:"dcat-dig",Redes:"dcat-red",Stage:"dcat-sta",Website:"dcat-web",Otro:"dcat-otr"};
+const DT_TABLE='diseno_tareas';
+
+let dFilter='all';
+
+function dSetFilter(f,btn){
+  dFilter=f;
+  document.querySelectorAll('.dfbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  doDiseno();
+}
+
+function dWeekStart(s){
+  const d=new Date(s+'T00:00:00');
+  const day=d.getDay();
+  const diff=d.getDate()-day+(day===0?-6:1);
+  const m=new Date(d); m.setDate(diff);
+  return m.toISOString().slice(0,10);
+}
+
+function dFmtDate(s){
+  const d=new Date(s+'T00:00:00');
+  return d.getDate()+' '+MES[d.getMonth()];
+}
+
+/* ── Supabase: load statuses ── */
+async function dLoadStatuses(){
+  try{
+    const rows=await sbFetch(DT_TABLE+'?select=task_id,status');
+    rows.forEach(r=>{
+      const t=DESIGN_TASKS.find(t=>t.id===r.task_id);
+      if(t) t.status=r.status;
+    });
+  }catch(e){
+    /* table may not exist yet — seed it on first toggle */
+    console.warn('diseno_tareas not seeded yet');
+  }
+}
+
+/* ── Supabase: upsert one task status ── */
+async function dSaveStatus(task){
+  try{
+    await sbFetch(DT_TABLE,{
+      method:'POST',
+      headers:{'Prefer':'resolution=merge-duplicates'},
+      body:JSON.stringify([{task_id:task.id,status:task.status}])
+    });
+  }catch(e){console.error('Error saving task status',e);}
+}
+
+/* ── Toggle completed / pending ── */
+async function dToggle(taskId){
+  const t=DESIGN_TASKS.find(t=>t.id===taskId);
+  if(!t) return;
+  t.status=t.status===100?0:100;
+  await dSaveStatus(t);
+  doDiseno();
+}
+
+function doDiseno(){
+  const tasks=DESIGN_TASKS.filter(t=>{
+    if(dFilter==='all') return true;
+    if(dFilter==='pending') return t.status<100;
+    if(dFilter==='done') return t.status===100;
+    return t.owner.includes(dFilter);
+  });
+
+  const byWeek={};
+  tasks.forEach(t=>{
+    const wk=dWeekStart(t.start);
+    if(!byWeek[wk]) byWeek[wk]=[];
+    byWeek[wk].push(t);
+  });
+  const weeks=Object.keys(byWeek).sort();
+
+  /* stats always reflect full list, not filtered */
+  const all=DESIGN_TASKS;
+  document.getElementById('ds-total').textContent=all.length;
+  document.getElementById('ds-done').textContent=all.filter(t=>t.status===100).length;
+  document.getElementById('ds-pend').textContent=all.filter(t=>t.status<100).length;
+  document.getElementById('ds-weeks').textContent=Object.keys(Object.fromEntries(all.map(t=>[dWeekStart(t.start),1]))).length;
+
+  const cont=document.getElementById('diseno-weeks');
+  if(weeks.length===0){cont.innerHTML='<div style="padding:20px;text-align:center;color:#aaa;font-size:12px">No hay tareas con este filtro.</div>';return;}
+
+  let h='';
+  weeks.forEach(wk=>{
+    const wkTasks=byWeek[wk];
+    const wkEnd=new Date(wk+'T00:00:00'); wkEnd.setDate(wkEnd.getDate()+4);
+    const wkEndStr=wkEnd.toISOString().slice(0,10);
+    const allDone=wkTasks.every(t=>t.status===100);
+    h+=`<div class="dweek"><div class="dwhdr"><span class="dwlbl">Semana del ${dFmtDate(wk)} – ${dFmtDate(wkEndStr)}</span><span class="dwcnt" style="${allDone?'background:#9fe1cb;color:#085041':''}">${wkTasks.length} tarea${wkTasks.length!==1?'s':''}</span></div>`;
+    wkTasks.forEach(t=>{
+      const dot=DCAT_DOT[t.cat]||'#888';
+      const catCls=DCAT_CLS[t.cat]||'dcat-otr';
+      const done=t.status===100;
+      const toggleCls=done?'done':'pend';
+      const toggleLbl=done?'✓ Completado':'Pendiente';
+      const titleStyle=done?'text-decoration:line-through;color:#aaa':'';
+      h+=`<div class="dtrow"><span class="dcdot" style="background:${dot}"></span><span class="dttitle" style="${titleStyle}">${t.title}</span><span class="dtmeta"><span class="dcattag ${catCls}">${t.cat}</span><span class="dowbadge">${t.owner}</span><button class="dtoggle ${toggleCls}" onclick="dToggle('${t.id}')">${toggleLbl}</button></span></div>`;
+    });
+    h+='</div>';
+  });
+  cont.innerHTML=h;
 }
 
 /* ══════════ MODAL EDIT ══════════ */
@@ -539,7 +759,7 @@ function renderList(){
 
 /* ══════════ SUPABASE CONFIG ══════════ */
 const SB_URL='https://suggxkbvmaqrgtogfgys.supabase.co';
-const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1Z2d4a2J2bWFxcmd0b2dmZ3lzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1ODcyOTIsImV4cCI6MjA5NDE2MzI5Mn0.hBv5mYFNMMYxJpnx2gb_2nAFIV0dr_Oo7WvEg5jH1cY';
+const SB_KEY='sb_publishable_Tp8QISyHRk3avq1g2v-8cw_KXNxTITc';
 const TABLE='bef_tareas';
 
 const DEFAULT_EV=EV.map(ev=>({n:ev.n,t:ev.t,s:ymd(ev.s),e:ymd(ev.e)}));
@@ -551,21 +771,11 @@ function ind(msg,color){
 }
 
 async function sbFetch(path,opts={}){
-  const method=(opts.method||'GET').toUpperCase();
-  const isWrite=method==='POST'||method==='PATCH';
-  const defaultHeaders={
-    'apikey':SB_KEY,
-    'Authorization':'Bearer '+SB_KEY,
-    'Content-Type':'application/json',
-  };
-  if(isWrite) defaultHeaders['Prefer']='return=representation';
-  const mergedHeaders={...defaultHeaders,...(opts.headers||{})};
-  const {headers:_,...restOpts}=opts;
   const res=await fetch(SB_URL+'/rest/v1/'+path,{
-    headers:mergedHeaders,
-    ...restOpts
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation',...(opts.headers||{})},
+    ...opts
   });
-  if(!res.ok){const t=await res.text();throw new Error('Supabase error: '+res.status+' '+t);}
+  if(!res.ok){const t=await res.text();throw new Error(t);}
   const txt=await res.text();
   return txt?JSON.parse(txt):[];
 }
@@ -578,12 +788,13 @@ async function loadFromDB(){
       EV=rows.map(r=>({id:r.id,n:r.nombre,t:r.tipo,s:fYMD(r.fecha_inicio),e:fYMD(r.fecha_fin)}));
       ind('','');
     } else {
+      /* First load — seed default data */
       ind('Cargando datos iniciales…','#888');
       await seedDefault();
     }
   }catch(e){
     console.error(e);
-    ind('Error: '+e.message,'#A32D2D');
+    ind('Error de conexión — usando datos locales','#A32D2D');
   }
 }
 
@@ -612,44 +823,8 @@ async function saveToDB(ev){
 
 async function deleteFromDB(id){
   try{
-    await sbFetch(TABLE+'?id=eq.'+id,{method:'DELETE'});
+    await sbFetch(TABLE+'?id=eq.'+id,{method:'DELETE',headers:{'Prefer':''}});
   }catch(e){console.error(e);ind('Error al eliminar','#A32D2D');}
-}
-
-async function deduplicateDB(){
-  ind('Buscando duplicados…','#888');
-  try{
-    // Fetch all rows
-    const rows=await sbFetch(TABLE+'?select=id,nombre,tipo,fecha_inicio,fecha_fin&order=id.asc');
-    const seen={};
-    const toDelete=[];
-    rows.forEach(r=>{
-      const key=r.nombre.trim()+'|'+r.tipo+'|'+r.fecha_inicio+'|'+r.fecha_fin;
-      if(seen[key]!==undefined){
-        toDelete.push(r.id);
-      } else {
-        seen[key]=r.id;
-      }
-    });
-    if(toDelete.length===0){
-      ind('Sin duplicados ✓','#0F6E56');
-      return;
-    }
-    // Delete one by one
-    let deleted=0;
-    for(const id of toDelete){
-      try{
-        await sbFetch(TABLE+'?id=eq.'+id,{method:'DELETE',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':''}});
-        deleted++;
-      }catch(e){console.error('Error deleting id '+id,e);}
-    }
-    ind(deleted+' duplicado(s) eliminado(s) ✓','#0F6E56');
-    await loadFromDB();
-    refresh();
-  }catch(e){
-    console.error(e);
-    ind('Error: '+e.message,'#A32D2D');
-  }
 }
 
 async function resetToDefault(){
@@ -676,9 +851,7 @@ async function saveModal(){
   const saved=await saveToDB(updated);
   if(saved){
     EV[editIdx]={id:saved.id,n:saved.nombre,t:saved.tipo,s:fYMD(saved.fecha_inicio),e:fYMD(saved.fecha_fin)};
-    ind('Cambios guardados ✓','#0F6E56');
-  } else {
-    ind('No se pudo guardar — revisa la consola','#A32D2D');
+    ind('Cambios guardados','#0F6E56');
   }
   document.getElementById('overlay').classList.remove('open');
   editIdx=-1; refresh();
@@ -723,6 +896,7 @@ function refresh(){
 /* ══════════ INIT ══════════ */
 (async()=>{
   await loadFromDB();
+  await dLoadStatuses();
   doStats(); doMonth(); doWeek(); doGantt();
 })();
 </script>
