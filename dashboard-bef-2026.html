@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · Boricua Emprende Fest 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:13px;color:#1a1a1a;background:#f0f0ed;padding:20px;min-height:100vh}
+.wrap{max-width:1200px;margin:0 auto;background:#fff;border-radius:14px;border:1px solid #e0e0dc;padding:24px}
+.hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid #e8e8e4;margin-bottom:14px}
+.htitle{font-size:18px;font-weight:700}.hsub{font-size:12px;color:#888;margin-top:3px}
+.badge{background:#f4c0d1;color:#72243e;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#f5f5f3;border-radius:8px;padding:10px 14px}
+.slbl{font-size:11px;color:#888;margin-bottom:3px}.sval{font-size:22px;font-weight:700}
+.leg{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.li{display:flex;align-items:center;gap:6px;font-size:12px;color:#666}
+.lsq{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.tabs{display:flex;gap:4px;margin-bottom:14px;border-bottom:1px solid #e8e8e4;padding-bottom:12px}
+.tab{padding:6px 18px;border-radius:8px;border:1px solid #ddd;font-size:12px;cursor:pointer;background:#fff;color:#666;font-family:inherit}
+.tab:hover{background:#f5f5f3}
+.tab.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a;font-weight:600}
+.view{display:none}.view.active{display:block}
+
+/* GANTT */
+.gout{overflow-x:auto;border:1px solid #e0e0dc;border-radius:10px}
+.gtbl{border-collapse:collapse;width:max-content;min-width:100%}
+.gtbl th,.gtbl td{padding:0;border:0}
+.gth{background:#f5f5f3;padding:7px 12px;font-size:11px;font-weight:700;color:#555;text-align:left;border-bottom:1px solid #e0e0dc;border-right:1px solid #e0e0dc;position:sticky;left:0;z-index:5;width:230px;min-width:230px;max-width:230px}
+.gtd{background:#fff;padding:4px 12px;font-size:12px;border-bottom:1px solid #ebebeb;border-right:1px solid #e0e0dc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:230px;min-width:230px;max-width:230px;position:sticky;left:0;z-index:2}
+.gtd.grp{font-weight:700;font-size:10px;color:#555;letter-spacing:.05em;text-transform:uppercase;padding:7px 12px}
+.gmth{font-size:11px;font-weight:700;color:#1a1a1a;text-align:center;padding:6px 4px;border-bottom:1px solid #e0e0dc;border-right:1px solid #e0e0dc;white-space:nowrap;background:#f5f5f3}
+.gwth{font-size:10px;color:#aaa;text-align:center;padding:4px 0;border-bottom:1px solid #e0e0dc;border-right:1px solid #ebebeb;min-width:36px;width:36px;background:#f5f5f3}
+.gwth.tw{background:#FCEBEB;color:#A32D2D;font-weight:700}
+.gc{min-width:36px;width:36px;height:28px;border-right:1px solid #f0f0f0;border-bottom:1px solid #ebebeb}
+.gc.bb{background:#b5d4f4}.gc.bp{background:#f4c0d1}.gc.bt{background:#9fe1cb}
+.gc.sb.bb{border-left:3px solid #185FA5}.gc.sb.bp{border-left:3px solid #993556}.gc.sb.bt{border-left:3px solid #0F6E56}
+.gc.tw{border-right:2px solid #E24B4A}.gc.grp{height:28px}
+
+/* MONTH */
+.mnav{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.nbtn{padding:5px 16px;border-radius:8px;border:1px solid #ddd;cursor:pointer;font-size:13px;background:#fff;color:#444;font-family:inherit}
+.nbtn:hover{background:#f5f5f3}
+.nlbl{font-size:15px;font-weight:700;min-width:180px;text-align:center}
+.calwrap{border:1px solid #e0e0dc;border-radius:8px;overflow:hidden}
+.dowrow{display:grid;grid-template-columns:repeat(7,1fr);background:#f5f5f3;border-bottom:1px solid #e0e0dc}
+.dow{padding:6px;text-align:center;font-size:11px;color:#888;font-weight:700}
+.calweeks{display:flex;flex-direction:column}
+.calweek{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid #ebebeb;position:relative}
+.calweek:last-child{border-bottom:0}
+.daycol{border-right:1px solid #ebebeb;padding:4px 5px;position:relative}
+.daycol:last-child{border-right:0}
+.daycol.other{background:#fafaf8}.daycol.tday{background:#fff8f5}
+.dnum{font-size:11px;color:#888;font-weight:600}.dnum.td{color:#A32D2D;font-weight:800}
+.evbar{position:absolute;height:19px;font-size:10px;font-weight:600;line-height:19px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:opacity .1s}
+.evbar:hover{opacity:.8}
+.evbar.blue{background:#b5d4f4;color:#0c447c}.evbar.pink{background:#f4c0d1;color:#72243e}.evbar.teal{background:#9fe1cb;color:#085041}
+.evbar.es.blue{border-left:3px solid #185FA5}.evbar.es.pink{border-left:3px solid #993556}.evbar.es.teal{border-left:3px solid #0F6E56}
+
+/* WEEK */
+.wgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.wcol{border:1px solid #e0e0dc;border-radius:8px;min-height:200px;background:#fff}
+.wcol.tw{border:2px solid #E24B4A}
+.wchdr{padding:7px 9px;border-bottom:1px solid #e8e8e4}
+.wdn{font-size:10px;color:#aaa;font-weight:700;text-transform:uppercase}
+.wdd{font-size:16px;font-weight:700}.wdd.td{color:#A32D2D}
+.wevs{padding:6px}
+.wev{font-size:10px;padding:3px 5px;border-radius:4px;margin-bottom:3px;line-height:1.4;font-weight:600;cursor:pointer}
+.wev:hover{opacity:.8}
+.wev.blue{background:#b5d4f4;color:#0c447c}.wev.pink{background:#f4c0d1;color:#72243e}.wev.teal{background:#9fe1cb;color:#085041}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:14px;border:1px solid #e0e0dc;padding:24px;width:420px;max-width:95vw;position:relative}
+.modal-title{font-size:15px;font-weight:700;margin-bottom:16px}
+.mclose{position:absolute;top:16px;right:16px;background:none;border:none;font-size:18px;cursor:pointer;color:#888;line-height:1}
+.mclose:hover{color:#1a1a1a}
+.fg{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.fl{font-size:11px;color:#666;font-weight:700}
+.fg input,.fg select{font-size:13px;padding:8px 10px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;font-family:inherit;width:100%;outline:none}
+.fg input:focus,.fg select:focus{border-color:#aaa}
+.mbtns{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.btn{padding:8px 18px;border-radius:8px;border:1px solid #ddd;cursor:pointer;font-size:12px;background:#fff;color:#1a1a1a;font-family:inherit;font-weight:600}
+.btn:hover{background:#f5f5f3}
+.btnp{background:#1a1a1a;color:#fff;border-color:#1a1a1a}.btnp:hover{background:#333}
+.btnd{color:#A32D2D;border-color:#f09595}.btnd:hover{background:#FCEBEB}
+.fmsg{font-size:12px;font-weight:600}
+
+/* ADD PANEL */
+.addpanel{margin-top:20px;border:1px solid #e0e0dc;border-radius:10px;overflow:hidden}
+.aphdr{background:#f5f5f3;padding:11px 16px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid #e0e0dc;user-select:none}
+.aphdr:hover{background:#efefec}
+.apbody{padding:16px;display:none}
+.apbody.open{display:block}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.tlist{margin-top:12px;border:1px solid #e0e0dc;border-radius:8px;overflow:hidden;max-height:300px;overflow-y:auto}
+.trow{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;padding:7px 12px;border-bottom:1px solid #ebebeb;font-size:12px}
+.trow:last-child{border-bottom:0}.trow:nth-child(even){background:#fafaf8}
+.tn{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.td2{font-size:10px;color:#aaa;margin-top:1px}
+.tbadge{font-size:10px;padding:2px 9px;border-radius:10px;font-weight:700;white-space:nowrap}
+.tebtn{font-size:11px;padding:3px 10px;border:1px solid #ddd;border-radius:6px;cursor:pointer;background:#fff;color:#555;font-family:inherit}
+.tebtn:hover{background:#f5f5f3}
+hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
+.stitle{font-size:12px;font-weight:700;color:#555;margin-bottom:10px}
+.hint{font-size:11px;color:#aaa;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hdr">
+  <div><div class="htitle">Boricua Emprende Fest 2026</div><div class="hsub">Dashboard de planificación · Mayo – Septiembre 2026</div></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+    <div class="badge">Evento: 4 sep 2026</div>
+    <div id="dbadge" style="font-size:11px;color:#993556;font-weight:700"></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:2px">
+      <span id="save-ind" style="font-size:11px;font-weight:600"></span>
+      <button onclick="resetToDefault()" style="font-size:11px;padding:3px 10px;border:1px solid #ddd;border-radius:6px;cursor:pointer;background:#fff;color:#888;font-family:inherit">Restaurar originales</button>
+    </div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="slbl">Días al evento</div><div class="sval" id="sdays" style="color:#993556">—</div></div>
+  <div class="stat"><div class="slbl">Semanas restantes</div><div class="sval" id="sweeks">—</div></div>
+  <div class="stat"><div class="slbl">Tareas BEF</div><div class="sval" id="sbef" style="color:#993556">—</div></div>
+  <div class="stat"><div class="slbl">Tareas Reporte</div><div class="sval" id="srep" style="color:#185fa5">—</div></div>
+</div>
+
+<div class="leg">
+  <div class="li"><div class="lsq" style="background:#b5d4f4"></div>Reporte comunidad empresarial</div>
+  <div class="li"><div class="lsq" style="background:#f4c0d1"></div>Boricua Emprende Fest</div>
+  <div class="li"><div class="lsq" style="background:#9fe1cb"></div>Revisiones &amp; seguimiento</div>
+  <div class="li"><div class="lsq" style="background:#E24B4A;border-radius:50%"></div>Semana actual</div>
+  <div class="li" style="color:#aaa;font-style:italic">Doble clic en tarea para editar</div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="sv('month',this)">Mes</button>
+  <button class="tab" onclick="sv('week',this)">Semana</button>
+  <button class="tab" onclick="sv('gantt',this)">Línea de tiempo</button>
+</div>
+
+<div id="vmonth" class="view active">
+  <div class="mnav">
+    <button class="nbtn" onclick="chM(-1)">&#8592;</button>
+    <div class="nlbl" id="mlbl"></div>
+    <button class="nbtn" onclick="chM(1)">&#8594;</button>
+  </div>
+  <div id="mcal"></div>
+</div>
+<div id="vweek" class="view">
+  <div class="mnav">
+    <button class="nbtn" onclick="chW(-1)">&#8592;</button>
+    <div class="nlbl" id="wlbl" style="min-width:260px"></div>
+    <button class="nbtn" onclick="chW(1)">&#8594;</button>
+  </div>
+  <div id="wcal"></div>
+</div>
+<div id="vgantt" class="view"><div class="gout"><table class="gtbl" id="gtbl"></table></div></div>
+
+<!-- EDIT MODAL -->
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="mclose" onclick="closeModal()">&#x2715;</button>
+    <div class="modal-title" id="mtitle">Editar tarea</div>
+    <div class="fg"><label class="fl">Nombre de la tarea</label><input id="mn" type="text"></div>
+    <div class="fg"><label class="fl">Proyecto</label>
+      <select id="mt">
+        <option value="pink">Boricua Emprende Fest</option>
+        <option value="blue">Reporte comunidad</option>
+        <option value="teal">Revisión / Seguimiento</option>
+      </select>
+    </div>
+    <div class="frow">
+      <div class="fg"><label class="fl">Fecha inicio</label><input id="ms" type="date"></div>
+      <div class="fg"><label class="fl">Fecha fin</label><input id="me" type="date"></div>
+    </div>
+    <div class="mbtns">
+      <button class="btn btnp" onclick="saveModal()">Guardar</button>
+      <button class="btn btnd" onclick="deleteModal()">Eliminar</button>
+      <button class="btn" onclick="closeModal()">Cancelar</button>
+      <span class="fmsg" id="mmsg"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ADD PANEL -->
+<div class="addpanel">
+  <div class="aphdr" onclick="toggleAdd()">
+    <span>+ Agregar tarea nueva</span>
+    <span id="aarr" style="font-size:11px;color:#888">&#9660;</span>
+  </div>
+  <div class="apbody" id="apbody">
+    <div class="frow">
+      <div class="fg"><label class="fl">Nombre de la tarea</label><input id="an" type="text" placeholder="Ej: Diseño de banner"></div>
+      <div class="fg"><label class="fl">Proyecto</label>
+        <select id="at"><option value="pink">Boricua Emprende Fest</option><option value="blue">Reporte comunidad</option><option value="teal">Revisión / Seguimiento</option></select>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label class="fl">Fecha inicio</label><input id="as" type="date"></div>
+      <div class="fg"><label class="fl">Fecha fin</label><input id="ae" type="date"></div>
+    </div>
+    <div class="mbtns"><button class="btn btnp" onclick="addTask()">Agregar tarea</button><span class="fmsg" id="amsg"></span></div>
+    <div class="hint">Tip: en la vista Mes o Semana, haz doble clic sobre cualquier tarea para editarla directamente.</div>
+    <hr class="dv">
+    <div class="stitle">Todas las tareas</div>
+    <div class="tlist" id="tlist"></div>
+  </div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:11px;color:#bbb">Boricua Emprende Fest 2026 · Dashboard de planificación</div>
+</div>
+
+<script>
+const MES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const DS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const HOY=new Date(); HOY.setHours(0,0,0,0);
+
+function ymd(d){return d.toISOString().slice(0,10)}
+function fYMD(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
+function add(d,n){const r=new Date(d);r.setDate(r.getDate()+n);return r}
+function eq(a,b){return a.getTime()===b.getTime()}
+function inR(d,s,e){return d>=s&&d<=e}
+
+/* ═══════════════════════════════════════════
+   VERIFIED EVENT DATA — audited from screenshots
+   ═══════════════════════════════════════════ */
+let EV=[
+  /* ── MAY ── */
+  /* Screenshot 1: bar starts Mon 27 Apr, runs through Fri 1 May */
+  {n:'[N] Glosario BE Fest',              s:new Date(2026,3,27), e:new Date(2026,4,1),  t:'pink'},
+  /* Bar starts Mon 27 Apr, runs through Fri 1 May */
+  {n:'[N] Montaje App Whova & LISC',      s:new Date(2026,3,27), e:new Date(2026,4,1),  t:'pink'},
+  /* Bar starts Tue 28 Apr, runs through Sat 2 May */
+  {n:'[N] KPIs Panal',                    s:new Date(2026,3,28), e:new Date(2026,4,2),  t:'pink'},
+  /* Bar Mon 4 May – Fri 8 May */
+  {n:'[N] Website: Comité Estratégico',   s:new Date(2026,4,4),  e:new Date(2026,4,8),  t:'pink'},
+  /* Teal bar Tue 12 – Fri 22 May */
+  {n:'Dashboard: Emprendedores',          s:new Date(2026,4,12), e:new Date(2026,4,22), t:'teal'},
+  /* Blue dot Wed 13 May only (appears twice in Apple Cal = 2 calendars, same day) */
+  {n:'SME Digital Innovation Summit',     s:new Date(2026,4,13), e:new Date(2026,4,13), t:'blue'},
+  /* Teal single day Tue 26 May */
+  {n:'Reunión de revisión: Dashboard',    s:new Date(2026,4,26), e:new Date(2026,4,26), t:'teal'},
+  /* Teal single day Tue 26 May */
+  {n:'Implementar cambios: Dashboard',    s:new Date(2026,4,26), e:new Date(2026,4,26), t:'teal'},
+  /* Blue dot Wed 27 May */
+  {n:'Dashboard: C66',                    s:new Date(2026,4,27), e:new Date(2026,4,27), t:'blue'},
+  /* Pink bar Wed 27 May → Thu 4 Jun (visible in both May & Jun screenshots) */
+  {n:'[N] LISC: Website',                 s:new Date(2026,4,27), e:new Date(2026,5,4),  t:'pink'},
+
+  /* ── JUN ── */
+  /* Screenshot 2: Mon 1 Jun */
+  {n:'Reunión de revisión: Dashboard',    s:new Date(2026,5,1),  e:new Date(2026,5,1),  t:'teal'},
+  {n:'Implementar cambios: Dashboard C66',s:new Date(2026,5,1),  e:new Date(2026,5,1),  t:'teal'},
+  /* Blue bar Tue 2 Jun */
+  {n:'Dashboard: Orgs',                   s:new Date(2026,5,2),  e:new Date(2026,5,2),  t:'blue'},
+  /* Pink bar Tue 2 Jun → Thu 4 Jun (ends 10 AM shown) */
+  {n:'[N] LISC: Assets de lanzamiento',   s:new Date(2026,5,2),  e:new Date(2026,5,4),  t:'pink'},
+  /* Mon 8 Jun */
+  {n:'Reunión de revisión: Dashboard',    s:new Date(2026,5,8),  e:new Date(2026,5,8),  t:'teal'},
+  {n:'Implementar cambios: Dashboard Orgs',s:new Date(2026,5,8), e:new Date(2026,5,8),  t:'teal'},
+  /* Teal bar Tue 9 Jun */
+  {n:'Reporte: Website',                  s:new Date(2026,5,9),  e:new Date(2026,5,9),  t:'teal'},
+  /* Mon 15 Jun */
+  {n:'[NOR] Assets Keynote Speakers',     s:new Date(2026,5,15), e:new Date(2026,5,15), t:'pink'},
+  /* Blue bar Mon 15 Jun */
+  {n:'REV Reporte: Website',              s:new Date(2026,5,15), e:new Date(2026,5,15), t:'blue'},
+  /* Blue single Mon 15 Jun 9AM */
+  {n:'Reunión Revisión: Website',         s:new Date(2026,5,15), e:new Date(2026,5,15), t:'blue'},
+  /* Blue bar Wed 17 Jun – ends Thu 18 (ends 10AM) */
+  {n:'Reporte: Presentación',             s:new Date(2026,5,17), e:new Date(2026,5,18), t:'blue'},
+  /* Mon 29 Jun single */
+  {n:'Natalia: OOO',                      s:new Date(2026,5,29), e:new Date(2026,6,10), t:'teal'},
+  /* Pink bar Wed 1 Jul – Thu 2 Jul (visible at bottom of Jun screenshot) */
+  {n:'[N] Table tents: Auspiciadores',    s:new Date(2026,6,1),  e:new Date(2026,6,2),  t:'pink'},
+
+  /* ── JUL ── */
+  /* Screenshot 3 */
+  /* Pink bar Mon 6 – Sat 10 Jul (ends 10AM) */
+  {n:'[N] Website: Mentores',             s:new Date(2026,6,6),  e:new Date(2026,6,10), t:'pink'},
+  {n:'[NOR] Reel de Mentores',            s:new Date(2026,6,6),  e:new Date(2026,6,10), t:'pink'},
+  /* Pink bar Mon 13 – Fri 17 Jul */
+  {n:'[A] Agenda: Carrusel de Tracks 40%',s:new Date(2026,6,13), e:new Date(2026,6,17), t:'pink'},
+  /* Pink single Mon 13 Jul */
+  {n:'LISC: Cheques Simbólicos',          s:new Date(2026,6,13), e:new Date(2026,6,13), t:'pink'},
+  /* Pink bar Mon 20 – Thu 23 Jul */
+  {n:'[N] Backwalls',                     s:new Date(2026,6,20), e:new Date(2026,6,23), t:'pink'},
+  {n:'Camisas: Voluntarios',              s:new Date(2026,6,20), e:new Date(2026,6,23), t:'pink'},
+  {n:'LISC: Asset finalistas',            s:new Date(2026,6,20), e:new Date(2026,6,23), t:'pink'},
+  /* Pink bar Mon 27 Jul (starts) */
+  {n:'[NOR] Reels: Mentor/MCs/Auspi',    s:new Date(2026,6,27), e:new Date(2026,7,3),  t:'pink'},
+  /* Pink bar Tue 28 Jul (starts) */
+  {n:'[N] Dboards: Activaciones',         s:new Date(2026,6,28), e:new Date(2026,7,3),  t:'pink'},
+
+  /* ── AGO ── */
+  /* Screenshot 4: pink bars starting Mon 3 Aug, continuous through Sep */
+  {n:'[A&N] Website: Mantenimiento Logos Sponsors', s:new Date(2026,7,3), e:new Date(2026,8,4), t:'pink'},
+  {n:'[A] Agenda: Carrusel de Tracks 60%',          s:new Date(2026,7,3), e:new Date(2026,8,4), t:'pink'},
+  /* Pink bar Mon 10 Aug starts */
+  {n:'[N] Señalización: D-Boards & Direccionales',  s:new Date(2026,7,10), e:new Date(2026,7,21), t:'pink'},
+  /* Pink Thu 20 Aug → Fri 21 */
+  {n:'[N] Planos Direccionales',                    s:new Date(2026,7,20), e:new Date(2026,7,21), t:'pink'},
+  /* Pink Mon 24 Aug starts */
+  {n:'[A] Generación Stills por Sesión',            s:new Date(2026,7,24), e:new Date(2026,8,1),  t:'pink'},
+  /* Pink Wed 26 – Fri 28 Aug */
+  {n:'[N] QA Final Imprenta',                       s:new Date(2026,7,26), e:new Date(2026,7,28), t:'pink'},
+  /* Pink Mon 31 Aug – Tue 1 Sep */
+  {n:'[N] Producción: Stage',                       s:new Date(2026,7,31), e:new Date(2026,8,1),  t:'pink'},
+  /* Pink Thu 4 Sep – single day EVENTO */
+  {n:'EVENTO: Boricua Emprende Fest',               s:new Date(2026,8,4),  e:new Date(2026,8,4),  t:'pink'},
+
+  /* ── SEP ── */
+  /* Screenshot 5: pink Mon 7 – Tue 8 Sep */
+  {n:'Certificados de participación & agradecimientos', s:new Date(2026,8,7), e:new Date(2026,8,8), t:'teal'},
+];
+
+/* ══════════ HELPERS ══════════ */
+const TL={pink:'BEF',blue:'Reporte',teal:'Revisión'};
+const TBG={pink:'#f4c0d1',blue:'#b5d4f4',teal:'#9fe1cb'};
+const TTC={pink:'#72243e',blue:'#0c447c',teal:'#085041'};
+
+function doStats(){
+  const ev=new Date(2026,8,4);
+  const dl=Math.max(0,Math.round((ev-HOY)/86400000));
+  document.getElementById('sdays').textContent=dl;
+  document.getElementById('sweeks').textContent=Math.ceil(dl/7);
+  document.getElementById('sbef').textContent=EV.filter(e=>e.t==='pink').length;
+  document.getElementById('srep').textContent=EV.filter(e=>e.t==='blue').length;
+  document.getElementById('dbadge').textContent=dl+' días restantes';
+}
+
+/* ══════════ GANTT ══════════ */
+function doGantt(){
+  const PS=new Date(2026,3,27),PE=new Date(2026,8,14);
+  const weeks=[];
+  let d=new Date(PS);
+  while(d.getDay()!==1) d=add(d,1);
+  while(d<=PE){weeks.push(new Date(d));d=add(d,7);}
+  const mS={};
+  weeks.forEach((w)=>{
+    const k=w.getFullYear()*100+w.getMonth();
+    if(!mS[k]) mS[k]={m:w.getMonth(),y:w.getFullYear(),c:0};
+    mS[k].c++;
+  });
+  const GRP=[
+    {label:'Reporte Comunidad Empresarial',t:'blue',bg:'#EBF4FC'},
+    {label:'Boricua Emprende Fest',t:'pink',bg:'#FDF0F5'},
+    {label:'Revisiones & Seguimiento',t:'teal',bg:'#EAF7F2'},
+  ];
+  let h='<thead><tr><th class="gth">Tarea</th>';
+  Object.values(mS).forEach(ms=>{h+=`<th colspan="${ms.c}" class="gmth">${MES[ms.m]} ${ms.y}</th>`;});
+  h+='</tr><tr><th class="gth" style="font-size:10px;color:#aaa;font-weight:400">Semana &rarr;</th>';
+  weeks.forEach(w=>{
+    const it=HOY>=w&&HOY<add(w,7);
+    h+=`<th class="gwth${it?' tw':''}">${w.getDate()}/${w.getMonth()+1}</th>`;
+  });
+  h+='</tr></thead><tbody>';
+  GRP.forEach(g=>{
+    const gevs=EV.filter(e=>e.t===g.t);
+    h+=`<tr><td class="gtd grp" style="background:${g.bg}">${g.label}</td>`;
+    weeks.forEach(()=>{h+=`<td class="gc grp" style="background:${g.bg}"></td>`;});
+    h+='</tr>';
+    gevs.forEach((ev,ri)=>{
+      const idx=EV.indexOf(ev);
+      h+=`<tr><td class="gtd" title="${ev.n}">${ev.n}</td>`;
+      weeks.forEach(w=>{
+        const we=add(w,6),inB=ev.s<=we&&ev.e>=w,isS=ev.s>=w&&ev.s<=we,isTW=HOY>=w&&HOY<add(w,7);
+        const tc=ev.t[0];
+        let cls='gc';
+        if(inB) cls+=` b${tc}${isS?' sb':''}`;
+        if(isTW) cls+=' tw';
+        h+=`<td class="${cls}"></td>`;
+      });
+      h+='</tr>';
+    });
+  });
+  h+='</tbody>';
+  document.getElementById('gtbl').innerHTML=h;
+}
+
+/* ══════════ MONTH with multi-day bars ══════════ */
+let cM=HOY.getMonth(),cY=HOY.getFullYear();
+
+function doMonth(){
+  document.getElementById('mlbl').textContent=MES[cM]+' '+cY;
+  const fd=new Date(cY,cM,1).getDay();
+  const dim=new Date(cY,cM+1,0).getDate();
+  const cells=[];
+  for(let i=0;i<fd;i++) cells.push(null);
+  for(let d=1;d<=dim;d++) cells.push(new Date(cY,cM,d));
+  while(cells.length%7!==0) cells.push(null);
+  const nw=cells.length/7;
+  const BH=20,BG=2,DNH=20;
+
+  /* compute bar positions */
+  const slotMap=Array.from({length:nw},()=>Array(7).fill(0));
+  const bars=[];
+  EV.forEach((ev,eidx)=>{
+    const mS=new Date(cY,cM,1),mE=new Date(cY,cM,dim);
+    if(ev.e<mS||ev.s>mE) return;
+    const cS=ev.s<mS?mS:ev.s;
+    const cE=ev.e>mE?mE:ev.e;
+    for(let wi=0;wi<nw;wi++){
+      const wc=cells.slice(wi*7,(wi+1)*7);
+      let colS=-1,colE=-1;
+      wc.forEach((dc,ci)=>{
+        if(dc&&inR(dc,cS,cE)){if(colS===-1) colS=ci; colE=ci;}
+      });
+      if(colS===-1) continue;
+      let slot=0;
+      for(let c=colS;c<=colE;c++) slot=Math.max(slot,slotMap[wi][c]);
+      for(let c=colS;c<=colE;c++) slotMap[wi][c]=slot+1;
+      const isStart=cS>=wc[colS]&&(wc[colE]?cS<=wc[colE]:true);
+      const isEnd=cE<=(wc[colE]||wc[colS]);
+      bars.push({wi,colS,colSpan:colE-colS+1,slot,label:ev.n,t:ev.t,isStart,isEnd,eidx});
+    }
+  });
+
+  const maxSl=Array(nw).fill(0);
+  bars.forEach(b=>{maxSl[b.wi]=Math.max(maxSl[b.wi],b.slot+1);});
+  const rowH=wi=>DNH+(maxSl[wi]*(BH+BG))+8;
+
+  let h='<div class="calwrap"><div class="dowrow">';
+  DS.forEach(d=>{h+=`<div class="dow">${d}</div>`;});
+  h+='</div><div class="calweeks">';
+  for(let wi=0;wi<nw;wi++){
+    const rh=rowH(wi);
+    h+=`<div class="calweek" style="min-height:${rh}px">`;
+    for(let ci=0;ci<7;ci++){
+      const dc=cells[wi*7+ci];
+      let cls='daycol';
+      if(!dc||dc.getMonth()!==cM) cls+=' other';
+      else if(eq(dc,HOY)) cls+=' tday';
+      const num=dc?dc.getDate():'';
+      const nc=dc&&eq(dc,HOY)?'dnum td':'dnum';
+      h+=`<div class="${cls}" style="min-height:${rh}px"><div class="${nc}">${num}</div></div>`;
+    }
+    /* bars */
+    bars.filter(b=>b.wi===wi).forEach(b=>{
+      const left=`calc(${b.colS}/7*100% + 2px)`;
+      const w=`calc(${b.colSpan}/7*100% - 4px)`;
+      const top=DNH+b.slot*(BH+BG);
+      const rTL=b.isStart?'3px':'0';
+      const rTR=b.isEnd?'3px':'0';
+      const rBR=b.isEnd?'3px':'0';
+      const rBL=b.isStart?'3px':'0';
+      const show=b.isStart||b.colS===0;
+      h+=`<div class="evbar ${b.t}${b.isStart?' es':''}" style="left:${left};width:${w};top:${top}px;border-radius:${rTL} ${rTR} ${rBR} ${rBL}" title="${b.label}" ondblclick="openModal(${b.eidx})">${show?b.label:''}</div>`;
+    });
+    h+='</div>';
+  }
+  h+='</div></div>';
+  document.getElementById('mcal').innerHTML=h;
+}
+function chM(d){cM+=d;if(cM>11){cM=0;cY++;}if(cM<0){cM=11;cY--;}doMonth();}
+
+/* ══════════ WEEK ══════════ */
+let wS=new Date(HOY); wS.setDate(wS.getDate()-wS.getDay());
+function doWeek(){
+  const we=add(wS,6);
+  document.getElementById('wlbl').textContent=`${wS.getDate()} ${MES[wS.getMonth()]} – ${we.getDate()} ${MES[we.getMonth()]} ${we.getFullYear()}`;
+  let h='<div class="wgrid">';
+  for(let i=0;i<7;i++){
+    const date=add(wS,i),isT=eq(date,HOY);
+    const evs=EV.map((ev,idx)=>({ev,idx})).filter(({ev})=>inR(date,ev.s,ev.e));
+    h+=`<div class="wcol${isT?' tw':''}"><div class="wchdr"><div class="wdn">${DS[i]}</div><div class="wdd${isT?' td':''}">${date.getDate()}</div></div><div class="wevs">`;
+    evs.forEach(({ev,idx})=>{
+      h+=`<div class="wev ${ev.t}" title="${ev.n}" ondblclick="openModal(${idx})">${ev.n}</div>`;
+    });
+    h+='</div></div>';
+  }
+  h+='</div>';
+  document.getElementById('wcal').innerHTML=h;
+}
+function chW(d){wS=add(wS,d*7);doWeek();}
+
+/* ══════════ VIEW SWITCHER ══════════ */
+function sv(name,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('v'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='month') doMonth();
+  if(name==='week') doWeek();
+}
+
+/* ══════════ MODAL EDIT ══════════ */
+let editIdx=-1;
+function openModal(idx){
+  editIdx=idx;
+  const ev=EV[idx];
+  document.getElementById('mtitle').textContent='Editar: '+ev.n;
+  document.getElementById('mn').value=ev.n;
+  document.getElementById('mt').value=ev.t;
+  document.getElementById('ms').value=ymd(ev.s);
+  document.getElementById('me').value=ymd(ev.e);
+  document.getElementById('mmsg').textContent='';
+  document.getElementById('overlay').classList.add('open');
+}
+function closeModal(e){
+  if(e&&e.target!==document.getElementById('overlay')) return;
+  document.getElementById('overlay').classList.remove('open');
+  editIdx=-1;
+}
+/* ══════════ ADD PANEL ══════════ */
+function toggleAdd(){
+  const b=document.getElementById('apbody');
+  const open=b.classList.toggle('open');
+  document.getElementById('aarr').innerHTML=open?'&#9650;':'&#9660;';
+  if(open) renderList();
+}
+function renderList(){
+  const sorted=[...EV].map((ev,i)=>({ev,i})).sort((a,b)=>a.ev.s-b.ev.s);
+  let h='';
+  sorted.forEach(({ev,i})=>{
+    const sd=`${ev.s.getDate()} ${MES[ev.s.getMonth()]}`;
+    const ed=`${ev.e.getDate()} ${MES[ev.e.getMonth()]}`;
+    h+=`<div class="trow"><div><div class="tn" title="${ev.n}">${ev.n}</div><div class="td2">${sd} – ${ed}</div></div><span class="tbadge" style="background:${TBG[ev.t]};color:${TTC[ev.t]}">${TL[ev.t]}</span><button class="tebtn" onclick="openModal(${i})">Editar</button></div>`;
+  });
+  if(!h) h='<div style="padding:14px;color:#aaa;font-size:12px;text-align:center">No hay tareas</div>';
+  document.getElementById('tlist').innerHTML=h;
+}
+
+/* ══════════ SUPABASE CONFIG ══════════ */
+const SB_URL='https://suggxkbvmaqrgtogfgys.supabase.co';
+const SB_KEY='sb_publishable_Tp8QISyHRk3avq1g2v-8cw_KXNxTITc';
+const TABLE='bef_tareas';
+
+const DEFAULT_EV=EV.map(ev=>({n:ev.n,t:ev.t,s:ymd(ev.s),e:ymd(ev.e)}));
+
+function ind(msg,color){
+  const el=document.getElementById('save-ind');
+  el.textContent=msg; el.style.color=color;
+  if(msg) setTimeout(()=>{el.textContent='';},3000);
+}
+
+async function sbFetch(path,opts={}){
+  const res=await fetch(SB_URL+'/rest/v1/'+path,{
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation',...(opts.headers||{})},
+    ...opts
+  });
+  if(!res.ok){const t=await res.text();throw new Error(t);}
+  const txt=await res.text();
+  return txt?JSON.parse(txt):[];
+}
+
+async function loadFromDB(){
+  ind('Cargando…','#888');
+  try{
+    const rows=await sbFetch(TABLE+'?select=*&order=fecha_inicio.asc');
+    if(rows.length>0){
+      EV=rows.map(r=>({id:r.id,n:r.nombre,t:r.tipo,s:fYMD(r.fecha_inicio),e:fYMD(r.fecha_fin)}));
+      ind('','');
+    } else {
+      /* First load — seed default data */
+      ind('Cargando datos iniciales…','#888');
+      await seedDefault();
+    }
+  }catch(e){
+    console.error(e);
+    ind('Error de conexión — usando datos locales','#A32D2D');
+  }
+}
+
+async function seedDefault(){
+  const rows=DEFAULT_EV.map(ev=>({nombre:ev.n,tipo:ev.t,fecha_inicio:ev.s,fecha_fin:ev.e}));
+  try{
+    const inserted=await sbFetch(TABLE,{method:'POST',body:JSON.stringify(rows)});
+    EV=inserted.map(r=>({id:r.id,n:r.nombre,t:r.tipo,s:fYMD(r.fecha_inicio),e:fYMD(r.fecha_fin)}));
+    ind('Datos cargados','#0F6E56');
+  }catch(e){console.error(e);ind('Error al inicializar datos','#A32D2D');}
+}
+
+async function saveToDB(ev){
+  /* ev has id if existing, no id if new */
+  const body={nombre:ev.n,tipo:ev.t,fecha_inicio:ymd(ev.s),fecha_fin:ymd(ev.e)};
+  try{
+    if(ev.id){
+      const rows=await sbFetch(TABLE+'?id=eq.'+ev.id,{method:'PATCH',body:JSON.stringify(body)});
+      return rows[0];
+    } else {
+      const rows=await sbFetch(TABLE,{method:'POST',body:JSON.stringify([body])});
+      return rows[0];
+    }
+  }catch(e){console.error(e);ind('Error al guardar','#A32D2D');return null;}
+}
+
+async function deleteFromDB(id){
+  try{
+    await sbFetch(TABLE+'?id=eq.'+id,{method:'DELETE',headers:{'Prefer':''}});
+  }catch(e){console.error(e);ind('Error al eliminar','#A32D2D');}
+}
+
+async function resetToDefault(){
+  if(!confirm('¿Restaurar todas las tareas originales? Se borrarán todos los cambios del equipo.')) return;
+  ind('Restaurando…','#888');
+  try{
+    /* Delete all rows */
+    await sbFetch(TABLE+'?id=gt.0',{method:'DELETE',headers:{'Prefer':''}});
+    await seedDefault();
+    refresh();
+    ind('Datos restaurados','#185fa5');
+  }catch(e){ind('Error al restaurar','#A32D2D');}
+}
+
+/* ══════════ MODAL — async save ══════════ */
+async function saveModal(){
+  if(editIdx<0) return;
+  const s=fYMD(document.getElementById('ms').value);
+  const e=fYMD(document.getElementById('me').value);
+  if(e<s){document.getElementById('mmsg').style.color='#A32D2D';document.getElementById('mmsg').textContent='La fecha fin debe ser después del inicio.';return;}
+  document.getElementById('mmsg').style.color='#888';
+  document.getElementById('mmsg').textContent='Guardando…';
+  const updated={...EV[editIdx],n:document.getElementById('mn').value,t:document.getElementById('mt').value,s,e};
+  const saved=await saveToDB(updated);
+  if(saved){
+    EV[editIdx]={id:saved.id,n:saved.nombre,t:saved.tipo,s:fYMD(saved.fecha_inicio),e:fYMD(saved.fecha_fin)};
+    ind('Cambios guardados','#0F6E56');
+  }
+  document.getElementById('overlay').classList.remove('open');
+  editIdx=-1; refresh();
+}
+
+async function deleteModal(){
+  if(editIdx<0) return;
+  if(!confirm('¿Eliminar esta tarea?')) return;
+  const id=EV[editIdx].id;
+  if(id) await deleteFromDB(id);
+  EV.splice(editIdx,1);
+  document.getElementById('overlay').classList.remove('open');
+  editIdx=-1; ind('Tarea eliminada','#0F6E56'); refresh();
+}
+
+async function addTask(){
+  const n=document.getElementById('an').value.trim();
+  const t=document.getElementById('at').value;
+  const s=fYMD(document.getElementById('as').value);
+  const e=fYMD(document.getElementById('ae').value);
+  const msg=document.getElementById('amsg');
+  if(!n){msg.style.color='#A32D2D';msg.textContent='Escribe un nombre.';return;}
+  if(e<s){msg.style.color='#A32D2D';msg.textContent='La fecha fin debe ser después del inicio.';return;}
+  msg.style.color='#888';msg.textContent='Guardando…';
+  const saved=await saveToDB({n,t,s,e});
+  if(saved){
+    EV.push({id:saved.id,n:saved.nombre,t:saved.tipo,s:fYMD(saved.fecha_inicio),e:fYMD(saved.fecha_fin)});
+    document.getElementById('an').value='';
+    msg.style.color='#0F6E56';msg.textContent='Tarea agregada.';
+    setTimeout(()=>{msg.textContent='';},3000);
+    refresh();
+  }
+}
+
+/* ══════════ REFRESH ══════════ */
+function refresh(){
+  doStats(); doGantt(); renderList();
+  const at=document.querySelector('.tab.active');
+  if(at){const nm=at.textContent.trim();if(nm==='Mes')doMonth();if(nm==='Semana')doWeek();}
+}
+
+/* ══════════ INIT ══════════ */
+(async()=>{
+  await loadFromDB();
+  doStats(); doMonth(); doWeek(); doGantt();
+})();
+</script>
+</body>
+</html>
