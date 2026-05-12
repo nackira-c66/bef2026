@@ -34,8 +34,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 .gwth{font-size:10px;color:#aaa;text-align:center;padding:4px 0;border-bottom:1px solid #e0e0dc;border-right:1px solid #ebebeb;min-width:36px;width:36px;background:#f5f5f3}
 .gwth.tw{background:#FCEBEB;color:#A32D2D;font-weight:700}
 .gc{min-width:36px;width:36px;height:28px;border-right:1px solid #f0f0f0;border-bottom:1px solid #ebebeb}
-.gc.bb{background:#b5d4f4}.gc.bp{background:#f4c0d1}.gc.bt{background:#9fe1cb}
-.gc.sb.bb{border-left:3px solid #185FA5}.gc.sb.bp{border-left:3px solid #993556}.gc.sb.bt{border-left:3px solid #0F6E56}
+.gc.bb{background:#b5d4f4}.gc.bp{background:#f4c0d1}.gc.bt{background:#9fe1cb}.gc.bk{background:#f5e6c8}
+.gc.sb.bb{border-left:3px solid #185FA5}.gc.sb.bp{border-left:3px solid #993556}.gc.sb.bt{border-left:3px solid #0F6E56}.gc.sb.bk{border-left:3px solid #c47f00}
 .gc.tw{border-right:2px solid #E24B4A}.gc.grp{height:28px}
 
 /* MONTH */
@@ -51,12 +51,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 .calweek:last-child{border-bottom:0}
 .daycol{border-right:1px solid #ebebeb;padding:4px 5px;position:relative}
 .daycol:last-child{border-right:0}
-.daycol.other{background:#fafaf8}.daycol.tday{background:#fff8f5}
+.daycol.other{background:#fafaf8}.daycol.tday{background:#fff8f5}.daycol.holiday{background:repeating-linear-gradient(135deg,#fdf6e3,#fdf6e3 4px,#fef9f0 4px,#fef9f0 8px)}
 .dnum{font-size:11px;color:#888;font-weight:600}.dnum.td{color:#A32D2D;font-weight:800}
 .evbar{position:absolute;height:19px;font-size:10px;font-weight:600;line-height:19px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:opacity .1s}
 .evbar:hover{opacity:.8}
 .evbar.blue{background:#b5d4f4;color:#0c447c}.evbar.pink{background:#f4c0d1;color:#72243e}.evbar.teal{background:#9fe1cb;color:#085041}
 .evbar.es.blue{border-left:3px solid #185FA5}.evbar.es.pink{border-left:3px solid #993556}.evbar.es.teal{border-left:3px solid #0F6E56}
+.evbar.block{background:#f5e6c8;color:#7a5000}.evbar.es.block{border-left:3px solid #c47f00}
+.daycol.holiday{background:repeating-linear-gradient(135deg,#fdf6e3,#fdf6e3 4px,#fef9f0 4px,#fef9f0 8px)}
 
 /* WEEK */
 .wgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
@@ -134,6 +136,7 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
   <div class="li"><div class="lsq" style="background:#b5d4f4"></div>Reporte comunidad empresarial</div>
   <div class="li"><div class="lsq" style="background:#f4c0d1"></div>Boricua Emprende Fest</div>
   <div class="li"><div class="lsq" style="background:#9fe1cb"></div>Revisiones &amp; seguimiento</div>
+  <div class="li"><div class="lsq" style="background:#f5e6c8;border:1px solid #c47f00"></div>Feriados &amp; eventos</div>
   <div class="li" style="color:#aaa;font-style:italic">Doble clic en una tarea para editar</div>
 </div>
 
@@ -316,12 +319,20 @@ let EV=[
   /* ── SEP ── */
   /* Screenshot 5: pink Mon 7 – Tue 8 Sep */
   {n:'Certificados de participación & agradecimientos', s:new Date(2026,8,7), e:new Date(2026,8,8), t:'teal'},
+
+  /* ── FERIADOS & EVENTOS ── */
+  {n:'Feriado',                    s:new Date(2026,4,25), e:new Date(2026,4,25), t:'block'},
+  {n:'Feriado',                    s:new Date(2026,5,18), e:new Date(2026,5,18), t:'block'},
+  {n:'Feriado',                    s:new Date(2026,6,3),  e:new Date(2026,6,3),  t:'block'},
+  {n:'Feriado',                    s:new Date(2026,6,23), e:new Date(2026,6,24), t:'block'},
+  {n:'Vacaciones',                 s:new Date(2026,6,29), e:new Date(2026,7,7),  t:'block'},
+  {n:'Boricua Emprende Fest 🎉',   s:new Date(2026,8,4),  e:new Date(2026,8,4),  t:'block'},
 ];
 
 /* ══════════ HELPERS ══════════ */
-const TL={pink:'BEF',blue:'Reporte',teal:'Revisión'};
-const TBG={pink:'#f4c0d1',blue:'#b5d4f4',teal:'#9fe1cb'};
-const TTC={pink:'#72243e',blue:'#0c447c',teal:'#085041'};
+const TL={pink:'BEF',blue:'Reporte',teal:'Revisión',block:'Bloqueo'};
+const TBG={pink:'#f4c0d1',blue:'#b5d4f4',teal:'#9fe1cb',block:'#f5e6c8'};
+const TTC={pink:'#72243e',blue:'#0c447c',teal:'#085041',block:'#7a5000'};
 
 function doStats(){
   const ev=new Date(2026,8,4);
@@ -350,6 +361,7 @@ function doGantt(){
     {label:'Reporte Comunidad Empresarial',t:'blue',bg:'#EBF4FC'},
     {label:'Boricua Emprende Fest',t:'pink',bg:'#FDF0F5'},
     {label:'Revisiones & Seguimiento',t:'teal',bg:'#EAF7F2'},
+    {label:'Feriados & Eventos',t:'block',bg:'#FDF6E3'},
   ];
   let h='<thead><tr><th class="gth">Tarea</th>';
   Object.values(mS).forEach(ms=>{h+=`<th colspan="${ms.c}" class="gmth">${MES[ms.m]} ${ms.y}</th>`;});
@@ -369,7 +381,7 @@ function doGantt(){
       h+=`<tr><td class="gtd" title="${ev.n}">${ev.n}</td>`;
       weeks.forEach(w=>{
         const we=add(w,6),inB=ev.s<=we&&ev.e>=w,isS=ev.s>=w&&ev.s<=we,isTW=HOY>=w&&HOY<add(w,7);
-        const tc=ev.t[0];
+        const tc=ev.t==='block'?'k':ev.t[0];
         let cls='gc';
         if(inB) cls+=` b${tc}${isS?' sb':''}`;
         if(isTW) cls+=' tw';
@@ -435,6 +447,7 @@ function doMonth(){
       let cls='daycol';
       if(!dc||dc.getMonth()!==cM) cls+=' other';
       else if(eq(dc,HOY)) cls+=' tday';
+      else if(dc&&EV.some(ev=>ev.t==='block'&&inR(dc,ev.s,ev.e))) cls+=' holiday';
       const num=dc?dc.getDate():'';
       const nc=dc&&eq(dc,HOY)?'dnum td':'dnum';
       h+=`<div class="${cls}" style="min-height:${rh}px"><div class="${nc}">${num}</div></div>`;
@@ -554,9 +567,17 @@ async function loadFromDB(){
     const rows=await sbFetch(TABLE+'?select=*&order=fecha_inicio.asc');
     if(rows.length>0){
       EV=rows.map(r=>({id:r.id,n:r.nombre,t:r.tipo,s:fYMD(r.fecha_inicio),e:fYMD(r.fecha_fin)}));
+      /* Sync any new default events not yet in DB (e.g. newly added block events) */
+      const missing=DEFAULT_EV.filter(def=>
+        !EV.some(e=>e.n===def.n&&ymd(e.s)===def.s&&ymd(e.e)===def.e&&e.t===def.t)
+      );
+      if(missing.length>0){
+        const toInsert=missing.map(ev=>({nombre:ev.n,tipo:ev.t,fecha_inicio:ev.s,fecha_fin:ev.e}));
+        const inserted=await sbFetch(TABLE,{method:'POST',body:JSON.stringify(toInsert)});
+        inserted.forEach(r=>EV.push({id:r.id,n:r.nombre,t:r.tipo,s:fYMD(r.fecha_inicio),e:fYMD(r.fecha_fin)}));
+      }
       ind('','');
     } else {
-      /* First load — seed default data */
       ind('Cargando datos iniciales…','#888');
       await seedDefault();
     }
