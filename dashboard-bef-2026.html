@@ -206,6 +206,7 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
     </div>
     <div class="mbtns"><button class="btn btnp" onclick="addTask()">Agregar tarea</button><span class="fmsg" id="amsg"></span></div>
     <div class="hint">Tip: en la vista Mes o Semana, haz doble clic sobre cualquier tarea para editarla directamente.</div>
+    <div style="margin-top:8px"><button class="btn" onclick="deduplicateDB()" style="font-size:11px;color:#888;border-color:#e0e0dc">Limpiar duplicados</button></div>
     <hr class="dv">
     <div class="stitle">Todas las tareas</div>
     <div class="tlist" id="tlist"></div>
@@ -564,15 +565,6 @@ async function loadFromDB(){
     const rows=await sbFetch(TABLE+'?select=*&order=fecha_inicio.asc');
     if(rows.length>0){
       EV=rows.map(r=>({id:r.id,n:r.nombre,t:r.tipo,s:fYMD(r.fecha_inicio),e:fYMD(r.fecha_fin)}));
-      /* Sync any new default events not yet in DB (e.g. newly added block events) */
-      const missing=DEFAULT_EV.filter(def=>
-        !EV.some(e=>e.n===def.n&&ymd(e.s)===def.s&&ymd(e.e)===def.e&&e.t===def.t)
-      );
-      if(missing.length>0){
-        const toInsert=missing.map(ev=>({nombre:ev.n,tipo:ev.t,fecha_inicio:ev.s,fecha_fin:ev.e}));
-        const inserted=await sbFetch(TABLE,{method:'POST',body:JSON.stringify(toInsert)});
-        inserted.forEach(r=>EV.push({id:r.id,n:r.nombre,t:r.tipo,s:fYMD(r.fecha_inicio),e:fYMD(r.fecha_fin)}));
-      }
       ind('','');
     } else {
       ind('Cargando datos iniciales…','#888');
@@ -611,6 +603,30 @@ async function deleteFromDB(id){
   try{
     await sbFetch(TABLE+'?id=eq.'+id,{method:'DELETE',headers:{'Prefer':''}});
   }catch(e){console.error(e);ind('Error al eliminar','#A32D2D');}
+}
+
+async function deduplicateDB(){
+  ind('Eliminando duplicados…','#888');
+  try{
+    const rows=await sbFetch(TABLE+'?select=*&order=id.asc');
+    const seen=new Set();
+    const toDelete=[];
+    rows.forEach(r=>{
+      const key=r.nombre+'|'+r.tipo+'|'+r.fecha_inicio+'|'+r.fecha_fin;
+      if(seen.has(key)) toDelete.push(r.id);
+      else seen.add(key);
+    });
+    for(const id of toDelete){
+      await sbFetch(TABLE+'?id=eq.'+id,{method:'DELETE',headers:{'Prefer':''}});
+    }
+    if(toDelete.length>0){
+      ind(toDelete.length+' duplicado(s) eliminado(s)','#0F6E56');
+    } else {
+      ind('Sin duplicados','#0F6E56');
+    }
+    await loadFromDB();
+    refresh();
+  }catch(e){console.error(e);ind('Error al deduplicar','#A32D2D');}
 }
 
 async function resetToDefault(){
