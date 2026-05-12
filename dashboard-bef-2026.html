@@ -172,6 +172,7 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
         <option value="pink">Boricua Emprende Fest</option>
         <option value="blue">Reporte comunidad</option>
         <option value="teal">Revisión / Seguimiento</option>
+        <option value="block">Feriados &amp; Eventos</option>
       </select>
     </div>
     <div class="frow">
@@ -197,7 +198,7 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
     <div class="frow">
       <div class="fg"><label class="fl">Nombre de la tarea</label><input id="an" type="text" placeholder="Ej: Diseño de banner"></div>
       <div class="fg"><label class="fl">Proyecto</label>
-        <select id="at"><option value="pink">Boricua Emprende Fest</option><option value="blue">Reporte comunidad</option><option value="teal">Revisión / Seguimiento</option></select>
+        <select id="at"><option value="pink">Boricua Emprende Fest</option><option value="blue">Reporte comunidad</option><option value="teal">Revisión / Seguimiento</option><option value="block">Feriados &amp; Eventos</option></select>
       </div>
     </div>
     <div class="frow">
@@ -550,12 +551,14 @@ function ind(msg,color){
 }
 
 async function sbFetch(path,opts={}){
+  const method=(opts.method||'GET').toUpperCase();
+  const isWrite=method==='POST'||method==='PATCH';
   const defaultHeaders={
     'apikey':SB_KEY,
     'Authorization':'Bearer '+SB_KEY,
     'Content-Type':'application/json',
-    'Prefer':'return=representation'
   };
+  if(isWrite) defaultHeaders['Prefer']='return=representation';
   const mergedHeaders={...defaultHeaders,...(opts.headers||{})};
   const {headers:_,...restOpts}=opts;
   const res=await fetch(SB_URL+'/rest/v1/'+path,{
@@ -609,32 +612,44 @@ async function saveToDB(ev){
 
 async function deleteFromDB(id){
   try{
-    await sbFetch(TABLE+'?id=eq.'+id,{method:'DELETE',headers:{'Prefer':''}});
+    await sbFetch(TABLE+'?id=eq.'+id,{method:'DELETE'});
   }catch(e){console.error(e);ind('Error al eliminar','#A32D2D');}
 }
 
 async function deduplicateDB(){
-  ind('Eliminando duplicados…','#888');
+  ind('Buscando duplicados…','#888');
   try{
-    const rows=await sbFetch(TABLE+'?select=*&order=id.asc');
-    const seen=new Set();
+    // Fetch all rows
+    const rows=await sbFetch(TABLE+'?select=id,nombre,tipo,fecha_inicio,fecha_fin&order=id.asc');
+    const seen={};
     const toDelete=[];
     rows.forEach(r=>{
-      const key=r.nombre+'|'+r.tipo+'|'+r.fecha_inicio+'|'+r.fecha_fin;
-      if(seen.has(key)) toDelete.push(r.id);
-      else seen.add(key);
+      const key=r.nombre.trim()+'|'+r.tipo+'|'+r.fecha_inicio+'|'+r.fecha_fin;
+      if(seen[key]!==undefined){
+        toDelete.push(r.id);
+      } else {
+        seen[key]=r.id;
+      }
     });
+    if(toDelete.length===0){
+      ind('Sin duplicados ✓','#0F6E56');
+      return;
+    }
+    // Delete one by one
+    let deleted=0;
     for(const id of toDelete){
-      await sbFetch(TABLE+'?id=eq.'+id,{method:'DELETE',headers:{'Prefer':''}});
+      try{
+        await sbFetch(TABLE+'?id=eq.'+id,{method:'DELETE',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':''}});
+        deleted++;
+      }catch(e){console.error('Error deleting id '+id,e);}
     }
-    if(toDelete.length>0){
-      ind(toDelete.length+' duplicado(s) eliminado(s)','#0F6E56');
-    } else {
-      ind('Sin duplicados','#0F6E56');
-    }
+    ind(deleted+' duplicado(s) eliminado(s) ✓','#0F6E56');
     await loadFromDB();
     refresh();
-  }catch(e){console.error(e);ind('Error al deduplicar','#A32D2D');}
+  }catch(e){
+    console.error(e);
+    ind('Error: '+e.message,'#A32D2D');
+  }
 }
 
 async function resetToDefault(){
