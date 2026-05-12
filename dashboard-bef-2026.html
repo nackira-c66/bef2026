@@ -114,8 +114,8 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
 <div class="hdr">
   <div><div class="htitle">Boricua Emprende Fest 2026</div><div class="hsub">Dashboard de planificación · Mayo – Septiembre 2026</div></div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
-    <div class="badge">Evento: 4 sep 2026</div>
-    <div id="dbadge" style="font-size:11px;color:#993556;font-weight:700"></div>
+    <div class="badge" style="background:#d4f4e0;color:#0a5c2e;font-size:15px;padding:8px 18px;font-weight:700">4 Sep 2026</div>
+    <div id="dbadge" style="font-size:11px;color:#555;font-weight:600"></div>
     <div style="display:flex;align-items:center;gap:10px;margin-top:2px">
       <span id="save-ind" style="font-size:11px;font-weight:600"></span>
       <button onclick="resetToDefault()" style="font-size:11px;padding:3px 10px;border:1px solid #ddd;border-radius:6px;cursor:pointer;background:#fff;color:#888;font-family:inherit">Restaurar originales</button>
@@ -124,7 +124,7 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
 </div>
 
 <div class="stats">
-  <div class="stat"><div class="slbl">Días al evento</div><div class="sval" id="sdays" style="color:#993556">—</div></div>
+  <div class="stat"><div class="slbl">Días al evento</div><div class="sval" id="sdays" style="color:#1a1a1a">—</div></div>
   <div class="stat"><div class="slbl">Semanas restantes</div><div class="sval" id="sweeks">—</div></div>
   <div class="stat"><div class="slbl">Tareas BEF</div><div class="sval" id="sbef" style="color:#993556">—</div></div>
   <div class="stat"><div class="slbl">Tareas Reporte</div><div class="sval" id="srep" style="color:#185fa5">—</div></div>
@@ -134,8 +134,7 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
   <div class="li"><div class="lsq" style="background:#b5d4f4"></div>Reporte comunidad empresarial</div>
   <div class="li"><div class="lsq" style="background:#f4c0d1"></div>Boricua Emprende Fest</div>
   <div class="li"><div class="lsq" style="background:#9fe1cb"></div>Revisiones &amp; seguimiento</div>
-  <div class="li"><div class="lsq" style="background:#E24B4A;border-radius:50%"></div>Semana actual</div>
-  <div class="li" style="color:#aaa;font-style:italic">Doble clic en tarea para editar</div>
+  <div class="li" style="color:#aaa;font-style:italic">Doble clic en una tarea para editar</div>
 </div>
 
 <div class="tabs">
@@ -331,7 +330,7 @@ function doStats(){
   document.getElementById('sweeks').textContent=Math.ceil(dl/7);
   document.getElementById('sbef').textContent=EV.filter(e=>e.t==='pink').length;
   document.getElementById('srep').textContent=EV.filter(e=>e.t==='blue').length;
-  document.getElementById('dbadge').textContent=dl+' días restantes';
+  document.getElementById('dbadge').textContent='Evento: '+dl+' días · '+Math.ceil(dl/7)+' semanas';
 }
 
 /* ══════════ GANTT ══════════ */
@@ -395,7 +394,7 @@ function doMonth(){
   for(let d=1;d<=dim;d++) cells.push(new Date(cY,cM,d));
   while(cells.length%7!==0) cells.push(null);
   const nw=cells.length/7;
-  const BH=20,BG=2,DNH=20;
+  const BH=20,BG=2,DNH=20,MIN_ROW_H=90;
 
   /* compute bar positions */
   const slotMap=Array.from({length:nw},()=>Array(7).fill(0));
@@ -423,7 +422,7 @@ function doMonth(){
 
   const maxSl=Array(nw).fill(0);
   bars.forEach(b=>{maxSl[b.wi]=Math.max(maxSl[b.wi],b.slot+1);});
-  const rowH=wi=>DNH+(maxSl[wi]*(BH+BG))+8;
+  const rowH=wi=>Math.max(MIN_ROW_H, DNH+(maxSl[wi]*(BH+BG))+8);
 
   let h='<div class="calwrap"><div class="dowrow">';
   DS.forEach(d=>{h+=`<div class="dow">${d}</div>`;});
