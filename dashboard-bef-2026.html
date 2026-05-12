@@ -538,7 +538,7 @@ function renderList(){
 
 /* ══════════ SUPABASE CONFIG ══════════ */
 const SB_URL='https://suggxkbvmaqrgtogfgys.supabase.co';
-const SB_KEY='sb_publishable_Tp8QISyHRk3avq1g2v-8cw_KXNxTITc';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1Z2d4a2J2bWFxcmd0b2dmZ3lzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1ODcyOTIsImV4cCI6MjA5NDE2MzI5Mn0.hBv5mYFNMMYxJpnx2gb_2nAFIV0dr_Oo7WvEg5jH1cY';
 const TABLE='bef_tareas';
 
 const DEFAULT_EV=EV.map(ev=>({n:ev.n,t:ev.t,s:ymd(ev.s),e:ymd(ev.e)}));
@@ -550,11 +550,19 @@ function ind(msg,color){
 }
 
 async function sbFetch(path,opts={}){
+  const defaultHeaders={
+    'apikey':SB_KEY,
+    'Authorization':'Bearer '+SB_KEY,
+    'Content-Type':'application/json',
+    'Prefer':'return=representation'
+  };
+  const mergedHeaders={...defaultHeaders,...(opts.headers||{})};
+  const {headers:_,...restOpts}=opts;
   const res=await fetch(SB_URL+'/rest/v1/'+path,{
-    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation',...(opts.headers||{})},
-    ...opts
+    headers:mergedHeaders,
+    ...restOpts
   });
-  if(!res.ok){const t=await res.text();throw new Error(t);}
+  if(!res.ok){const t=await res.text();throw new Error('Supabase error: '+res.status+' '+t);}
   const txt=await res.text();
   return txt?JSON.parse(txt):[];
 }
@@ -572,7 +580,7 @@ async function loadFromDB(){
     }
   }catch(e){
     console.error(e);
-    ind('Error de conexión — usando datos locales','#A32D2D');
+    ind('Error: '+e.message,'#A32D2D');
   }
 }
 
@@ -653,7 +661,9 @@ async function saveModal(){
   const saved=await saveToDB(updated);
   if(saved){
     EV[editIdx]={id:saved.id,n:saved.nombre,t:saved.tipo,s:fYMD(saved.fecha_inicio),e:fYMD(saved.fecha_fin)};
-    ind('Cambios guardados','#0F6E56');
+    ind('Cambios guardados ✓','#0F6E56');
+  } else {
+    ind('No se pudo guardar — revisa la consola','#A32D2D');
   }
   document.getElementById('overlay').classList.remove('open');
   editIdx=-1; refresh();
