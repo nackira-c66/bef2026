@@ -51,26 +51,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 .calweek:last-child{border-bottom:0}
 .daycol{border-right:1px solid #ebebeb;padding:4px 5px;position:relative}
 .daycol:last-child{border-right:0}
-.daycol.other{background:#fafaf8}.daycol.tday{background:#fff8f5}.daycol.holiday{background:repeating-linear-gradient(135deg,#fdf6e3,#fdf6e3 4px,#fef9f0 4px,#fef9f0 8px)}
+.daycol.other{background:#fafaf8}
+.daycol.past{background:#e8e8e6}
+.daycol.tday{background:#fff8f5}
+.daycol.holiday{background:repeating-linear-gradient(135deg,#fdf6e3,#fdf6e3 4px,#fef9f0 4px,#fef9f0 8px)}
 .dnum{font-size:11px;color:#888;font-weight:600}.dnum.td{color:#A32D2D;font-weight:800}
+.dnum.past{color:#999}
 .evbar{position:absolute;height:19px;font-size:10px;font-weight:600;line-height:19px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:opacity .1s}
 .evbar:hover{opacity:.8}
 .evbar.blue{background:#b5d4f4;color:#0c447c}.evbar.pink{background:#f4c0d1;color:#72243e}.evbar.teal{background:#9fe1cb;color:#085041}
 .evbar.es.blue{border-left:3px solid #185FA5}.evbar.es.pink{border-left:3px solid #993556}.evbar.es.teal{border-left:3px solid #0F6E56}
 .evbar.block{background:#f5e6c8;color:#7a5000}.evbar.es.block{border-left:3px solid #c47f00}
+.evbar.past{opacity:0.5;filter:grayscale(70%)}
 .daycol.holiday{background:repeating-linear-gradient(135deg,#fdf6e3,#fdf6e3 4px,#fef9f0 4px,#fef9f0 8px)}
 
 /* WEEK */
 .wgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .wcol{border:1px solid #e0e0dc;border-radius:8px;min-height:200px;background:#fff}
 .wcol.tw{border:2px solid #E24B4A}
+.wcol.past{background:#f5f5f3}
 .wchdr{padding:7px 9px;border-bottom:1px solid #e8e8e4}
 .wdn{font-size:10px;color:#aaa;font-weight:700;text-transform:uppercase}
-.wdd{font-size:16px;font-weight:700}.wdd.td{color:#A32D2D}
+.wdd{font-size:16px;font-weight:700}.wdd.td{color:#A32D2D}.wdd.past{color:#999}
 .wevs{padding:6px}
 .wev{font-size:10px;padding:3px 5px;border-radius:4px;margin-bottom:3px;line-height:1.4;font-weight:600;cursor:pointer}
 .wev:hover{opacity:.8}
 .wev.blue{background:#b5d4f4;color:#0c447c}.wev.pink{background:#f4c0d1;color:#72243e}.wev.teal{background:#9fe1cb;color:#085041}
+.wev.past{opacity:0.5;filter:grayscale(70%)}
 
 /* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center}
@@ -108,44 +115,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
 .stitle{font-size:12px;font-weight:700;color:#555;margin-bottom:10px}
 .hint{font-size:11px;color:#aaa;margin-top:6px}
-
-/* TAREAS TAB */
-.dfilters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.dfbtn{padding:5px 14px;border-radius:20px;border:1px solid #ddd;font-size:11px;cursor:pointer;background:#fff;color:#666;font-family:inherit;font-weight:600}
-.dfbtn:hover{background:#f5f5f3}
-.dfbtn.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
-.dweek{margin-bottom:10px;border:1px solid #e0e0dc;border-radius:10px;overflow:hidden}
-.dwhdr{background:#f5f5f3;padding:8px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #e0e0dc}
-.dwlbl{font-size:12px;font-weight:700;color:#1a1a1a;flex:1}
-.dwcnt{font-size:11px;background:#f4c0d1;color:#72243e;padding:2px 9px;border-radius:10px;font-weight:700}
-.dtrow{display:flex;align-items:flex-start;padding:8px 14px;border-bottom:1px solid #ebebeb;gap:10px}
-.dtrow:last-child{border-bottom:0}
-.dtrow:hover{background:#fafaf8}
-.dcdot{width:7px;height:7px;border-radius:50%;margin-top:4px;flex-shrink:0}
-.dttitle{font-size:12px;color:#1a1a1a;flex:1;line-height:1.4}
-.dtmeta{display:flex;gap:5px;align-items:center;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
-.dowbadge{font-size:10px;padding:2px 8px;border-radius:10px;background:#f5f5f3;color:#555;border:1px solid #e0e0dc;font-weight:600}
-.dcattag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
-.dcat-imp{background:#faece7;color:#993c1d}
-.dcat-dig{background:#e6f1fb;color:#185fa5}
-.dcat-red{background:#eeedfe;color:#534ab7}
-.dcat-sta{background:#fbeaf0;color:#993556}
-.dcat-web{background:#eaf3de;color:#3b6d11}
-.dcat-otr{background:#f5f5f3;color:#888}
-.dleg{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
-.dli{display:flex;align-items:center;gap:5px;font-size:11px;color:#666}
-.dlsq{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.dstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
-.dstat{background:#f5f5f3;border-radius:8px;padding:10px 14px}
-.dslbl{font-size:11px;color:#888;margin-bottom:3px}
-.dsval{font-size:20px;font-weight:700}
-.dtoggle{font-size:10px;padding:3px 10px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;font-weight:700;white-space:nowrap;transition:background .1s}
-.dtoggle.done{background:#9fe1cb;color:#085041;border-color:#5dcaa5}
-.dtoggle.done:hover{background:#5dcaa5}
-.dtoggle.pend{background:#f5f5f3;color:#555;border-color:#ddd}
-.dtoggle.pend:hover{background:#ebebeb}
-.deditbtn{font-size:10px;padding:3px 8px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;font-weight:600;background:#fff;color:#555}
-.deditbtn:hover{background:#f5f5f3}
 </style>
 </head>
 <body>
@@ -163,7 +132,7 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
 <div class="stats">
   <div class="stat"><div class="slbl">Días al evento</div><div class="sval" id="sdays" style="color:#1a1a1a">—</div></div>
   <div class="stat"><div class="slbl">Semanas restantes</div><div class="sval" id="sweeks">—</div></div>
-  <div class="stat"><div class="slbl">Tareas BEF</div><div class="sval" id="sbef" style="color:#993556">—</div><div id="sbef-sub" style="font-size:10px;color:#aaa;margin-top:2px"></div></div>
+  <div class="stat"><div class="slbl">Tareas BEF</div><div class="sval" id="sbef" style="color:#993556">—</div></div>
   <div class="stat"><div class="slbl">Tareas Reporte</div><div class="sval" id="srep" style="color:#185fa5">—</div></div>
 </div>
 
@@ -179,7 +148,6 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
   <button class="tab active" onclick="sv('month',this)">Mes</button>
   <button class="tab" onclick="sv('week',this)">Semana</button>
   <button class="tab" onclick="sv('gantt',this)">Línea de tiempo</button>
-  <button class="tab" onclick="sv('diseno',this)">Tareas</button>
 </div>
 
 <div id="vmonth" class="view active">
@@ -223,69 +191,6 @@ hr.dv{border:0;border-top:1px solid #e8e8e4;margin:14px 0}
       <button class="btn btnd" onclick="deleteModal()">Eliminar</button>
       <button class="btn" onclick="closeModal()">Cancelar</button>
       <span class="fmsg" id="mmsg"></span>
-    </div>
-  </div>
-</div>
-
-<div id="vdiseno" class="view">
-  <div class="dstats">
-    <div class="dstat"><div class="dslbl">Tareas totales</div><div class="dsval" id="ds-total">—</div></div>
-    <div class="dstat"><div class="dslbl">Completadas</div><div class="dsval" id="ds-done" style="color:#0F6E56">—</div></div>
-    <div class="dstat"><div class="dslbl">Pendientes</div><div class="dsval" id="ds-pend" style="color:#993556">—</div></div>
-    <div class="dstat"><div class="dslbl">Semanas activas</div><div class="dsval" id="ds-weeks">—</div></div>
-  </div>
-  <div class="dleg">
-    <span class="dli"><span class="dlsq" style="background:#D85A30"></span>Impreso</span>
-    <span class="dli"><span class="dlsq" style="background:#378ADD"></span>Digital</span>
-    <span class="dli"><span class="dlsq" style="background:#7F77DD"></span>Redes</span>
-    <span class="dli"><span class="dlsq" style="background:#D4537E"></span>Stage</span>
-    <span class="dli"><span class="dlsq" style="background:#639922"></span>Website</span>
-    <span class="dli"><span class="dlsq" style="background:#888"></span>Otro</span>
-  </div>
-  <div class="dfilters">
-    <button class="dfbtn active" onclick="dSetFilter('all',this)">Todas</button>
-    <button class="dfbtn" onclick="dSetFilter('Nackira',this)">Nackira</button>
-    <button class="dfbtn" onclick="dSetFilter('Noriana',this)">Noriana</button>
-    <button class="dfbtn" onclick="dSetFilter('Augusto',this)">Augusto</button>
-    <button class="dfbtn" onclick="dSetFilter('pending',this)">Pendientes</button>
-    <button class="dfbtn" onclick="dSetFilter('done',this)">Completadas</button>
-  </div>
-  <div id="diseno-weeks"></div>
-</div>
-
-<!-- TASK EDIT MODAL -->
-<div class="overlay" id="doverly" onclick="dCloseModal(event)">
-  <div class="modal" onclick="event.stopPropagation()">
-    <button class="mclose" onclick="dCloseModal()">&#x2715;</button>
-    <div class="modal-title">Editar tarea</div>
-    <div class="fg"><label class="fl">Título</label><input id="dt-title" type="text"></div>
-    <div class="fg"><label class="fl">Responsable</label>
-      <select id="dt-owner">
-        <option value="Nackira">Nackira</option>
-        <option value="Noriana">Noriana</option>
-        <option value="Augusto">Augusto</option>
-        <option value="Camila">Camila</option>
-        <option value="Natalia">Natalia</option>
-      </select>
-    </div>
-    <div class="fg"><label class="fl">Categoría</label>
-      <select id="dt-cat">
-        <option value="Impreso">Impreso</option>
-        <option value="Digital">Digital</option>
-        <option value="Redes">Redes</option>
-        <option value="Stage">Stage</option>
-        <option value="Website">Website</option>
-        <option value="Otro">Otro</option>
-      </select>
-    </div>
-    <div class="frow">
-      <div class="fg"><label class="fl">Fecha inicio</label><input id="dt-start" type="date"></div>
-      <div class="fg"><label class="fl">Fecha fin</label><input id="dt-end" type="date"></div>
-    </div>
-    <div class="mbtns">
-      <button class="btn btnp" onclick="dSaveModal()">Guardar</button>
-      <button class="btn" onclick="dCloseModal()">Cancelar</button>
-      <span class="fmsg" id="dt-msg"></span>
     </div>
   </div>
 </div>
@@ -440,10 +345,7 @@ function doStats(){
   const dl=Math.max(0,Math.round((ev-HOY)/86400000));
   document.getElementById('sdays').textContent=dl;
   document.getElementById('sweeks').textContent=Math.ceil(dl/7);
-  const total=DESIGN_TASKS.length;
-  const done=DESIGN_TASKS.filter(t=>t.status===100).length;
-  document.getElementById('sbef').textContent=total;
-  document.getElementById('sbef-sub').textContent=done+' completadas';
+  document.getElementById('sbef').textContent=EV.filter(e=>e.t==='pink').length;
   document.getElementById('srep').textContent=EV.filter(e=>e.t==='blue').length;
   document.getElementById('dbadge').textContent='Evento: '+dl+' días · '+Math.ceil(dl/7)+' semanas';
 }
@@ -551,9 +453,12 @@ function doMonth(){
       let cls='daycol';
       if(!dc||dc.getMonth()!==cM) cls+=' other';
       else if(eq(dc,HOY)) cls+=' tday';
+      else if(dc&&dc<HOY) cls+=' past';
       else if(dc&&EV.some(ev=>ev.t==='block'&&inR(dc,ev.s,ev.e))) cls+=' holiday';
       const num=dc?dc.getDate():'';
-      const nc=dc&&eq(dc,HOY)?'dnum td':'dnum';
+      let nc='dnum';
+      if(dc&&eq(dc,HOY)) nc+=' td';
+      else if(dc&&dc<HOY) nc+=' past';
       h+=`<div class="${cls}" style="min-height:${rh}px"><div class="${nc}">${num}</div></div>`;
     }
     /* bars */
@@ -566,7 +471,9 @@ function doMonth(){
       const rBR=b.isEnd?'3px':'0';
       const rBL=b.isStart?'3px':'0';
       const show=b.isStart||b.colS===0;
-      h+=`<div class="evbar ${b.t}${b.isStart?' es':''}" style="left:${left};width:${w};top:${top}px;border-radius:${rTL} ${rTR} ${rBR} ${rBL}" title="${b.label}" ondblclick="openModal(${b.eidx})">${show?b.label:''}</div>`;
+      const ev=EV[b.eidx];
+      const isPast=ev.e<HOY;
+      h+=`<div class="evbar ${b.t}${b.isStart?' es':''}${isPast?' past':''}" style="left:${left};width:${w};top:${top}px;border-radius:${rTL} ${rTR} ${rBR} ${rBL}" title="${b.label}" ondblclick="openModal(${b.eidx})">${show?b.label:''}</div>`;
     });
     h+='</div>';
   }
@@ -583,10 +490,12 @@ function doWeek(){
   let h='<div class="wgrid">';
   for(let i=0;i<7;i++){
     const date=add(wS,i),isT=eq(date,HOY);
+    const isPast=date<HOY;
     const evs=EV.map((ev,idx)=>({ev,idx})).filter(({ev})=>inR(date,ev.s,ev.e));
-    h+=`<div class="wcol${isT?' tw':''}"><div class="wchdr"><div class="wdn">${DS[i]}</div><div class="wdd${isT?' td':''}">${date.getDate()}</div></div><div class="wevs">`;
+    h+=`<div class="wcol${isT?' tw':''}${isPast?' past':''}"><div class="wchdr"><div class="wdn">${DS[i]}</div><div class="wdd${isT?' td':''}${isPast?' past':''}">${date.getDate()}</div></div><div class="wevs">`;
     evs.forEach(({ev,idx})=>{
-      h+=`<div class="wev ${ev.t}" title="${ev.n}" ondblclick="openModal(${idx})">${ev.n}</div>`;
+      const evPast=ev.e<HOY;
+      h+=`<div class="wev ${ev.t}${evPast?' past':''}" title="${ev.n}" ondblclick="openModal(${idx})">${ev.n}</div>`;
     });
     h+='</div></div>';
   }
@@ -603,215 +512,6 @@ function sv(name,btn){
   btn.classList.add('active');
   if(name==='month') doMonth();
   if(name==='week') doWeek();
-  if(name==='diseno') doDiseno();
-}
-
-/* ══════════ TAREAS TAB ══════════ */
-const DESIGN_TASKS=[
-  {id:"dt-001",title:"Save the date (Ads, Newsletter, Website Carrusel, Slide)",owner:"Nackira",start:"2026-02-20",end:"2026-02-20",status:100,cat:"Digital"},
-  {id:"dt-002",title:"Billboards",owner:"Nackira",start:"2026-04-23",end:"2026-04-23",status:100,cat:"Impreso"},
-  {id:"dt-003",title:"Boletos: Early bee (Ads, Newsletter, Website Carrusel, Slide)",owner:"Nackira",start:"2026-04-08",end:"2026-04-08",status:100,cat:"Digital"},
-  {id:"dt-004",title:"Boletos: Venta de boletos regular (Ads, Newsletter, Slide)",owner:"Nackira",start:"2026-04-08",end:"2026-04-08",status:100,cat:"Digital"},
-  {id:"dt-005",title:"Boletos: Venta de boletos con descuento (Post)",owner:"Nackira",start:"2026-04-08",end:"2026-04-08",status:100,cat:"Digital"},
-  {id:"dt-006",title:"El Panal Expo: Typeform",owner:"Nackira",start:"2026-04-08",end:"2026-04-08",status:100,cat:"Digital"},
-  {id:"dt-007",title:"El Panal Expo: Newsletter",owner:"Nackira",start:"2026-04-09",end:"2026-04-09",status:100,cat:"Digital"},
-  {id:"dt-008",title:"El Panal Expo: Post (Regular y Visítime)",owner:"Nackira",start:"2026-04-10",end:"2026-04-10",status:100,cat:"Digital"},
-  {id:"dt-009",title:"El Panal Expo: Cantidad de Conexiones Creadas",owner:"Nackira",start:"2026-04-11",end:"2026-04-11",status:100,cat:"Digital"},
-  {id:"dt-010",title:"Camisas: Team",owner:"Nackira",start:"2026-04-23",end:"2026-04-23",status:50,cat:"Impreso"},
-  {id:"dt-011",title:"Solicitar arte para Newsletter y email",owner:"Nackira",start:"2026-04-15",end:"2026-04-17",status:0,cat:"Digital"},
-  {id:"dt-012",title:"Website: Pagina de Comite Estratégico",owner:"Nackira",start:"2026-05-01",end:"2026-05-05",status:0,cat:"Website"},
-  {id:"dt-013",title:"El Panal Expo: Reel Logos de Orgs",owner:"Noriana",start:"2026-05-28",end:"2026-05-29",status:0,cat:"Redes"},
-  {id:"dt-014",title:"LISC Competition: Página en Website",owner:"Nackira",start:"2026-05-28",end:"2026-05-29",status:0,cat:"Website"},
-  {id:"dt-015",title:"Redes: La Placita",owner:"Noriana",start:"2026-06-01",end:"2026-06-01",status:100,cat:"Redes"},
-  {id:"dt-016",title:"LISC Competition: Post informativo (Requisitos, Categorías)",owner:"Nackira",start:"2026-06-02",end:"2026-06-05",status:0,cat:"Redes"},
-  {id:"dt-017",title:"Redes: La Colmena Pop-Up",owner:"Noriana",start:"2026-06-02",end:"2026-06-02",status:100,cat:"Redes"},
-  {id:"dt-018",title:"Redes/Email: Welcome Event Asset",owner:"Nackira",start:"2026-06-05",end:"2026-06-05",status:0,cat:"Redes"},
-  {id:"dt-019",title:"Redes: Reel de MCs",owner:"Noriana",start:"2026-06-05",end:"2026-06-05",status:0,cat:"Redes"},
-  {id:"dt-020",title:"Redes: El Glosario del BE Fest",owner:"Nackira",start:"2026-06-07",end:"2026-06-07",status:100,cat:"Redes"},
-  {id:"dt-021",title:"Ads: Asset de ventas para ENDI",owner:"Nackira",start:"2026-06-08",end:"2026-06-08",status:0,cat:"Digital"},
-  {id:"dt-022",title:"Redes: Carrusel de keynote speakers",owner:"Noriana",start:"2026-06-15",end:"2026-06-18",status:0,cat:"Redes"},
-  {id:"dt-023",title:"Stills de pantalla: Para todo el evento y cada sesión",owner:"Augusto",start:"2026-06-24",end:"2026-09-01",status:0,cat:"Digital"},
-  {id:"dt-024",title:"Table Tent - Reservado y Auspiciadores",owner:"Nackira",start:"2026-06-29",end:"2026-07-02",status:0,cat:"Impreso"},
-  {id:"dt-025",title:"Table Tent - Coffee break",owner:"Nackira",start:"2026-06-29",end:"2026-07-02",status:0,cat:"Impreso"},
-  {id:"dt-026",title:"Agenda Digital (en website)",owner:"Nackira",start:"2026-07-06",end:"2026-07-10",status:50,cat:"Website"},
-  {id:"dt-027",title:"Website: Pagina de Mentor Hub",owner:"Nackira",start:"2026-07-06",end:"2026-07-10",status:0,cat:"Website"},
-  {id:"dt-028",title:"Redes: Carruseles para cada track con descripción y sesiones",owner:"Augusto",start:"2026-07-13",end:"2026-08-28",status:0,cat:"Redes"},
-  {id:"dt-029",title:"Mentor Lounge Backwall",owner:"Nackira",start:"2026-07-20",end:"2026-07-23",status:0,cat:"Impreso"},
-  {id:"dt-030",title:"Camisas: Voluntarios",owner:"Nackira",start:"2026-08-03",end:"2026-08-03",status:0,cat:"Impreso"},
-  {id:"dt-031",title:"Redes: Giveaway",owner:"Nackira",start:"2026-08-03",end:"2026-08-03",status:0,cat:"Redes"},
-  {id:"dt-032",title:"Direccionales (6)",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
-  {id:"dt-033",title:"Dboard - Mentor Lounge",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
-  {id:"dt-034",title:"Dboard - El Panal Expo",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
-  {id:"dt-035",title:"Dboard - Sponsors",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
-  {id:"dt-036",title:"Dboard - Coffee Talks",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
-  {id:"dt-037",title:"Dboard - La Colmena PopUp",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
-  {id:"dt-038",title:"Dboard - La Placita",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
-  {id:"dt-039",title:"Dboard - Podcast Village",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
-  {id:"dt-040",title:"Dboard - Networking",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
-  {id:"dt-041",title:"Dboard - Salones (Tracks)",owner:"Nackira",start:"2026-08-10",end:"2026-08-21",status:0,cat:"Impreso"},
-  {id:"dt-042",title:"LISC Competition: Cheques simbólicos (Premiaciones)",owner:"Nackira",start:"2026-08-13",end:"2026-08-17",status:0,cat:"Impreso"},
-  {id:"dt-043",title:"Badge ID",owner:"Nackira",start:"2026-08-17",end:"2026-08-17",status:0,cat:"Impreso"},
-  {id:"dt-044",title:"Redes: Reel de Auspiciadores",owner:"Noriana",start:"2026-08-17",end:"2026-08-22",status:50,cat:"Redes"},
-  {id:"dt-045",title:"Planos de señalización",owner:"Nackira",start:"2026-08-24",end:"2026-08-25",status:0,cat:"Impreso"},
-  {id:"dt-046",title:"Table Tent - Welcome Event",owner:"Nackira",start:"2026-08-24",end:"2026-08-24",status:0,cat:"Impreso"},
-  {id:"dt-047",title:"Counter Signs (Registro)",owner:"Nackira",start:"2026-08-25",end:"2026-08-27",status:0,cat:"Impreso"},
-  {id:"dt-048",title:"Stage: Podium Graphics",owner:"Nackira",start:"2026-08-31",end:"2026-09-03",status:0,cat:"Stage"},
-  {id:"dt-049",title:"Stage: LED Screens",owner:"Nackira",start:"2026-08-31",end:"2026-09-03",status:0,cat:"Stage"},
-  {id:"dt-050",title:"Stage: Arco y/o Totems Digitales",owner:"Nackira",start:"2026-08-31",end:"2026-09-03",status:0,cat:"Stage"},
-  {id:"dt-051",title:"Welcome Event: Sponsor Loop",owner:"Noriana",start:"2026-08-31",end:"2026-08-31",status:0,cat:"Digital"},
-  {id:"dt-052",title:"Post Evento: Certificados, Agradecimientos",owner:"Nackira",start:"2026-09-07",end:"2026-09-08",status:0,cat:"Otro"},
-];
-
-const DCAT_DOT={Impreso:"#D85A30",Digital:"#378ADD",Redes:"#7F77DD",Stage:"#D4537E",Website:"#639922",Otro:"#888"};
-const DCAT_CLS={Impreso:"dcat-imp",Digital:"dcat-dig",Redes:"dcat-red",Stage:"dcat-sta",Website:"dcat-web",Otro:"dcat-otr"};
-const DT_TABLE='diseno_tareas';
-let dFilter='all';
-
-function dSetFilter(f,btn){
-  dFilter=f;
-  document.querySelectorAll('.dfbtn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  doDiseno();
-}
-
-function dWeekStart(s){
-  const d=new Date(s+'T00:00:00');
-  const day=d.getDay();
-  const diff=d.getDate()-day+(day===0?-6:1);
-  const m=new Date(d); m.setDate(diff);
-  return m.toISOString().slice(0,10);
-}
-
-function dFmtDate(s){
-  const d=new Date(s+'T00:00:00');
-  return d.getDate()+' '+MES[d.getMonth()];
-}
-
-async function dLoadStatuses(){
-  try{
-    const rows=await sbFetch(DT_TABLE+'?select=task_id,status,title,owner,cat,start_date,end_date');
-    rows.forEach(r=>{
-      const t=DESIGN_TASKS.find(t=>t.id===r.task_id);
-      if(!t) return;
-      t.status=r.status;
-      if(r.title)      t.title=r.title;
-      if(r.owner)      t.owner=r.owner;
-      if(r.cat)        t.cat=r.cat;
-      if(r.start_date) t.start=r.start_date;
-      if(r.end_date)   t.end=r.end_date;
-    });
-  }catch(e){ console.warn('diseno_tareas not seeded yet'); }
-}
-
-async function dSaveStatus(task){
-  try{
-    await sbFetch(DT_TABLE,{
-      method:'POST',
-      headers:{'Prefer':'resolution=merge-duplicates'},
-      body:JSON.stringify([{task_id:task.id,status:task.status}])
-    });
-  }catch(e){ console.error('Error saving task status',e); }
-}
-
-async function dToggle(taskId){
-  const t=DESIGN_TASKS.find(t=>t.id===taskId);
-  if(!t) return;
-  t.status=t.status===100?0:100;
-  await dSaveStatus(t);
-  doStats();
-  doDiseno();
-}
-
-let dEditId=null;
-
-function dOpenModal(taskId){
-  const t=DESIGN_TASKS.find(t=>t.id===taskId);
-  if(!t) return;
-  dEditId=taskId;
-  document.getElementById('dt-title').value=t.title;
-  document.getElementById('dt-owner').value=t.owner;
-  document.getElementById('dt-cat').value=t.cat;
-  document.getElementById('dt-start').value=t.start;
-  document.getElementById('dt-end').value=t.end;
-  document.getElementById('dt-msg').textContent='';
-  document.getElementById('doverly').classList.add('open');
-}
-
-function dCloseModal(e){
-  if(e&&e.target!==document.getElementById('doverly')) return;
-  document.getElementById('doverly').classList.remove('open');
-  dEditId=null;
-}
-
-async function dSaveModal(){
-  const t=DESIGN_TASKS.find(t=>t.id===dEditId);
-  if(!t) return;
-  const newStart=document.getElementById('dt-start').value;
-  const newEnd=document.getElementById('dt-end').value;
-  if(newEnd<newStart){
-    document.getElementById('dt-msg').style.color='#A32D2D';
-    document.getElementById('dt-msg').textContent='La fecha fin debe ser después del inicio.';
-    return;
-  }
-  document.getElementById('dt-msg').style.color='#888';
-  document.getElementById('dt-msg').textContent='Guardando…';
-  t.title=document.getElementById('dt-title').value.trim()||t.title;
-  t.owner=document.getElementById('dt-owner').value;
-  t.cat=document.getElementById('dt-cat').value;
-  t.start=newStart;
-  t.end=newEnd;
-  try{
-    await sbFetch(DT_TABLE,{
-      method:'POST',
-      headers:{'Prefer':'resolution=merge-duplicates'},
-      body:JSON.stringify([{task_id:t.id,status:t.status,title:t.title,owner:t.owner,cat:t.cat,start_date:t.start,end_date:t.end}])
-    });
-    ind('Cambios guardados ✓','#0F6E56');
-  }catch(e){ console.error(e); ind('Error al guardar','#A32D2D'); }
-  document.getElementById('doverly').classList.remove('open');
-  dEditId=null;
-  doDiseno();
-}
-
-function doDiseno(){
-  const tasks=DESIGN_TASKS.filter(t=>{
-    if(dFilter==='all') return true;
-    if(dFilter==='pending') return t.status<100;
-    if(dFilter==='done') return t.status===100;
-    return t.owner.includes(dFilter);
-  });
-  const byWeek={};
-  tasks.forEach(t=>{
-    const wk=dWeekStart(t.start);
-    if(!byWeek[wk]) byWeek[wk]=[];
-    byWeek[wk].push(t);
-  });
-  const weeks=Object.keys(byWeek).sort();
-  const all=DESIGN_TASKS;
-  document.getElementById('ds-total').textContent=all.length;
-  document.getElementById('ds-done').textContent=all.filter(t=>t.status===100).length;
-  document.getElementById('ds-pend').textContent=all.filter(t=>t.status<100).length;
-  const allWeeks=new Set(all.map(t=>dWeekStart(t.start)));
-  document.getElementById('ds-weeks').textContent=allWeeks.size;
-  const cont=document.getElementById('diseno-weeks');
-  if(weeks.length===0){cont.innerHTML='<div style="padding:20px;text-align:center;color:#aaa;font-size:12px">No hay tareas con este filtro.</div>';return;}
-  let h='';
-  weeks.forEach(wk=>{
-    const wkTasks=byWeek[wk];
-    const wkEnd=new Date(wk+'T00:00:00'); wkEnd.setDate(wkEnd.getDate()+4);
-    const wkEndStr=wkEnd.toISOString().slice(0,10);
-    const allDone=wkTasks.every(t=>t.status===100);
-    h+=`<div class="dweek"><div class="dwhdr"><span class="dwlbl">Semana del ${dFmtDate(wk)} – ${dFmtDate(wkEndStr)}</span><span class="dwcnt" style="${allDone?'background:#9fe1cb;color:#085041':''}">${wkTasks.length} tarea${wkTasks.length!==1?'s':''}</span></div>`;
-    wkTasks.forEach(t=>{
-      const dot=DCAT_DOT[t.cat]||'#888';
-      const catCls=DCAT_CLS[t.cat]||'dcat-otr';
-      const done=t.status===100;
-      const titleStyle=done?'text-decoration:line-through;color:#aaa':'';
-      h+=`<div class="dtrow"><span class="dcdot" style="background:${dot}"></span><span class="dttitle" style="${titleStyle}">${t.title}</span><span class="dtmeta"><span class="dcattag ${catCls}">${t.cat}</span><span class="dowbadge">${t.owner}</span><button class="deditbtn" onclick="dOpenModal('${t.id}')">Editar</button><button class="dtoggle ${done?'done':'pend'}" onclick="dToggle('${t.id}')">${done?'✓ Completado':'Pendiente'}</button></span></div>`;
-    });
-    h+='</div>';
-  });
-  cont.innerHTML=h;
 }
 
 /* ══════════ MODAL EDIT ══════════ */
@@ -991,11 +691,12 @@ async function saveModal(){
   if(saved){
     EV[editIdx]={id:saved.id,n:saved.nombre,t:saved.tipo,s:fYMD(saved.fecha_inicio),e:fYMD(saved.fecha_fin)};
     ind('Cambios guardados ✓','#0F6E56');
+    document.getElementById('overlay').classList.remove('open');
+    editIdx=-1;
+    refresh();
   } else {
     ind('No se pudo guardar — revisa la consola','#A32D2D');
   }
-  document.getElementById('overlay').classList.remove('open');
-  editIdx=-1; refresh();
 }
 
 async function deleteModal(){
@@ -1037,7 +738,6 @@ function refresh(){
 /* ══════════ INIT ══════════ */
 (async()=>{
   await loadFromDB();
-  await dLoadStatuses();
   doStats(); doMonth(); doWeek(); doGantt();
 })();
 </script>
